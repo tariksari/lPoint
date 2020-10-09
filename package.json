@@ -2,6 +2,11 @@
   "name": "LPoint",
   "version": "0.1.0",
   "private": true,
+  "description": "MacOs Vocabulary app helps you learn and organize English words efficiently.",
+  "author": "T.SARI <info@tariksari.com>",
+  "keywords": [
+    "language app"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
