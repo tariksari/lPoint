@@ -1,0 +1,46 @@
+.word-info-list {
+	display: flex;
+	flex-direction: column;
+	padding-top: 10px;
+
+	.row {
+		font-size: 17px;
+		background-color: #8c807b;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		border-bottom: 4px solid #473f39;
+
+		.item {
+			padding: 10px 20px 5px 20px;
+			justify-content: center;
+			height: 20px;
+			background-color: #e2abab;
+		}
+
+		.pronunciation-audio {
+			color: #000;
+			background-color: #e8cd7d;
+		}
+
+		.play-audio {
+			cursor: pointer;
+		}
+
+		.name {
+			font-size: 16px;
+			background-color: #1b1b1b;
+			color: #fff;
+		}
+
+		.word-action {
+			margin-right: 0;
+			background-color: #b9ffe5;
+			margin-left: auto;
+
+			.icon {
+				cursor: pointer;
+			}
+		}
+	}
+}
