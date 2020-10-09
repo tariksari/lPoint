@@ -11,7 +11,7 @@ import url from 'url';
 import { Options } from '../types';
 
 const DEFAULT_WINDOW_HEIGHT = 400;
-const DEFAULT_WINDOW_WIDTH = 400;
+const DEFAULT_WINDOW_WIDTH = 600;
 
 /**
  * Take as input some options, and return a sanitized version of it.
