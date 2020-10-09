@@ -30,6 +30,7 @@ export class ServiceRoutes {
 		app.post(
 			'/api/service/word',
 			check('type').not().isEmpty().isIn(WORD_TYPE),
+			check('word').not().isEmpty(),
 			check('lexical_category').not().isEmpty(),
 			check('audio').not().isEmpty(),
 			check('spell').not().isEmpty(),
