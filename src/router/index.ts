@@ -1,19 +1,19 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
-import DictionaryIndexPage from '../views/DictionaryIndex.vue';
+import AgendaPage from '../views/Agenda.vue';
 import SearchPage from '../views/Search.vue';
-import WordInfo from '../views/WordInfo.vue';
+import WordInfoPage from '../views/WordInfo.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		name: 'Main',
-		component: DictionaryIndexPage,
+		component: AgendaPage,
 	},
 	{
 		path: '/word-info/:word',
 		name: 'WordInfo',
-		component: WordInfo,
+		component: WordInfoPage,
 	},
 	{
 		path: '/search',
