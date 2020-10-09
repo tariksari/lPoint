@@ -1,0 +1,4 @@
+export const AGENDA_GET = 'AGENDA_GET';
+export const AGENDA_REQUEST = 'AGENDA_REQUEST';
+export const AGENDA_RESPONSE = 'AGENDA_RESPONSE';
+export const AGENDA_ERROR = 'AGENDA_ERROR';
