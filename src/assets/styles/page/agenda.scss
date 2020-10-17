@@ -1,16 +1,28 @@
 .agenda-list {
 	display: flex;
 	flex-wrap: wrap;
+	position: relative;
 	padding-top: 10px;
+
+	.view-type-button {
+		position: absolute;
+		right: 5px;
+		top: -40px;
+		color: #000000;
+		font-size: 25px;
+		cursor: pointer;
+	}
+
+	flex: 1 0 50%;
 
 	.item {
 		position: relative;
 		display: block;
-		flex: 1 0 21%; /* explanation below */
+		flex: 1 0 21%;
 		justify-content: center;
 		font-size: 16px;
 		padding: 1px;
-		background-color: #8c807b;
+		background-color: $pale-silver;
 		min-width: 100px;
 		height: auto;
 		margin: 2px 1px 10px 1px;
@@ -18,7 +30,7 @@
 
 		.name {
 			font-size: 17px;
-			background-color: #deb982;
+			background-color: $middle-grey;
 			padding: 5px 0 5px 0;
 		}
 		.spell {
@@ -28,21 +40,29 @@
 			font-size: 17px;
 			position: relative;
 			float: left;
-			background-color: #000000;
+			background-color: #4e4e4e;
 			color: #fff;
 			width: 20px;
 			height: 100%;
+			padding: 10px;
 
-			i {
+			svg {
 				cursor: pointer;
 				position: absolute;
 				top: 50%;
-				-webkit-transform: translate(-50%,-50%);
-				transform: translate(-50%,-50%);
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
 			}
 		}
+
 		.type {
 			font-size: 15px;
 		}
+	}
+}
+
+.list {
+	.item {
+		flex: 1 0 50% !important;
 	}
 }
