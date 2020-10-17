@@ -10,7 +10,6 @@ export default {
 					commit(CONSTANTS.AGENDA_RESPONSE, resp);
 				})
 				.catch((err) => {
-					console.log(err);
 					commit(CONSTANTS.AGENDA_ERROR, err.status);
 				});
 	},
