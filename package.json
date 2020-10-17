@@ -17,18 +17,19 @@
   },
   "main": "background.js",
   "dependencies": {
-    "@types/nprogress": "^0.2.0",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
     "electron-positioner": "^4.1.0",
-    "element-plus": "^1.0.1-alpha.4",
     "express-validator": "^6.6.1",
+    "mdue": "^0.1.2",
     "nedb-promises": "^4.1.0",
     "proxy-middleware": "^0.15.0",
     "request-promise": "^4.2.6",
+    "tailwindcss": "^1.9.2",
     "v-autocomplete": "^1.8.2",
     "vue": "^3.0.0-0",
     "vue-class-component": "^8.0.0-beta.4",
+    "vue-material-design-icons": "^4.9.0",
     "vue-router": "^4.0.0-beta.13",
     "vuex": "^4.0.0-0"
   },
@@ -43,20 +44,11 @@
     "babel-plugin-component": "^1.1.1",
     "electron": "^9.0.0",
     "electron-devtools-installer": "^3.1.0",
+    "node-sass": "^4.9.2",
     "sass": "^1.27.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
-    "vue-cli-plugin-electron-builder": "~2.0.0-rc.4"
-  },
-  "babel": {
-    "plugins": [
-      [
-        "component",
-        {
-          "libraryName": "element-ui",
-          "styleLibraryName": "theme-chalk"
-        }
-      ]
-    ]
+    "vue-cli-plugin-electron-builder": "~2.0.0-rc.4",
+    "vue-cli-plugin-element": "~1.0.1"
   }
 }
