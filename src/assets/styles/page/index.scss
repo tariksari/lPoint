@@ -5,6 +5,10 @@ body {
 	max-width: 600px;
 }
 
+*:focus {
+	outline: none !important;
+}
+
 #nav {
 	padding: 18px 0 18px 0;
 	background-color: $middle-grey;
@@ -18,7 +22,11 @@ body {
 		border-right: 1px solid $pale-silver;
 	}
 
-	.router-link-active  {
+	.router-link-active {
 		background-color: $dark-lava;
 	}
+}
+
+.page {
+	padding: 10px 5px 5px 5px;
 }
