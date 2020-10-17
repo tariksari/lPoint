@@ -1,12 +1,15 @@
 <template>
   <div>
-    <div class="agenda-list">
+    <div :class="[viewType ? 'grid' : 'list', 'page agenda-list']">
+      <div class="view-type-button" @click="this.listViewChanger()">
+        <format-list-bulleted v-if="viewType"></format-list-bulleted>
+        <grid-large v-else></grid-large >
+      </div>
       <div v-for="(value, key) in this.wordData" :key="key.id" class="item">
         <div class="audio">
-          <i
-            class="el-icon-video-play"
+          <play-box-outline
             @click="this.playAudio(value.audio)"
-          ></i>
+          ></play-box-outline>
         </div>
         <div class="name">{{ value.word }}</div>
         <div class="spell">{{ value.spell }}</div>
@@ -18,12 +21,19 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
+import { GridLarge, FormatListBulleted, PlayBoxOutline } from "mdue";
 
 @Options({
+  components: {
+    GridLarge,
+    FormatListBulleted,
+    PlayBoxOutline,
+  },
   data() {
     return {
       wordData: {},
       currentRoute: "agenda", //this.$route.params.word,
+      viewType: true,
     };
   },
   watch: {
@@ -56,6 +66,9 @@ import { mapActions, mapGetters } from "vuex";
     },
     playAudio(mediaUrl: string) {
       new Audio(mediaUrl).play();
+    },
+    listViewChanger() {
+      this.viewType = !this.viewType;
     },
   },
   created() {
