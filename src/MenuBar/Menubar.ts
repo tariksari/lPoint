@@ -7,6 +7,9 @@ import path from 'path';
 import { Options } from './types';
 import { cleanOptions } from './util/cleanOptions';
 import { getWindowPosition } from './util/getWindowPosition';
+import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
+
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 /**
  * The main Menubar class.
@@ -215,12 +218,14 @@ export class Menubar extends EventEmitter {
 		let trayImage =
 			this._options.icon ||
 			path.join(this._options.dir, 'IconTemplate.png');
+			
 		if (typeof trayImage === 'string' && !fs.existsSync(trayImage)) {
 			trayImage = path.join(
 				__dirname,
 				'..',
 				'src',
 				'assets',
+				'app',
 				'IconTemplate.png'
 			); // Default cat icon
 		}
@@ -321,8 +326,9 @@ export class Menubar extends EventEmitter {
 		// If the user explicity set options.index to false, we don't loadURL
 		// https://github.com/maxogden/menubar/issues/255
 		if (this._options.index !== false) {
+			createProtocol('app')
 			await this._browserWindow.loadURL(
-				'http://localhost:8080',
+				isDevelopment ? 'http://localhost:8080' : 'app://./index.html',
 				this._options.loadUrlOptions
 			);
 		}
