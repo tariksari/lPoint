@@ -9,6 +9,42 @@
 		background-color: #8c807b;
 		width: 100%;
 	}
+
+	input {
+		background: $pale-silver;
+		color: $dark-lava;
+		padding: 13px 29px 13px 13px;
+		box-shadow: none !important;
+		border: 2px solid #444548;
+		outline: 0;
+
+		:focus {
+			outline-style: none;
+			box-shadow: none;
+			border-color: transparent;
+			background-color: black;
+			color: $white;
+		}
+	}
+
+	button {
+		width: 150px;
+		margin-left: -20px;
+		font-size: 20px;
+		padding-left: 25px;
+		background-color: #42b983;
+		color: $white;
+
+		&:hover{
+			background-color: #629e83;
+
+		}
+		
+
+		span {
+			font-size: 14px;
+		}
+	}
 }
 
 .search-result {
@@ -17,7 +53,6 @@
 		padding-left: 0;
 		max-height: 300px;
 		overflow: auto;
-
 
 		a {
 			text-decoration: none;
@@ -40,7 +75,6 @@
 				position: absolute;
 				top: 8px;
 				right: 6px;
-
 			}
 		}
 	}
