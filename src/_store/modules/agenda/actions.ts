@@ -1,7 +1,6 @@
 import Axios from '@/_utils/http-client';
-
+import { types } from '../../types';
 import * as CONSTANTS from './constants';
-import {types} from '../../types'
 
 export default {
 	[CONSTANTS.AGENDA_GET]: ({ commit, dispatch }:types, wordType:string) => {
