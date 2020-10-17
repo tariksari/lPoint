@@ -1,9 +1,9 @@
 .word-info-list {
 	display: flex;
 	flex-direction: column;
-	padding-top: 10px;
 
 	.row {
+		height: 40px;
 		font-size: 17px;
 		background-color: #8c807b;
 		width: 100%;
@@ -12,15 +12,23 @@
 		border-bottom: 4px solid #473f39;
 
 		.item {
-			padding: 10px 20px 5px 20px;
+			padding: 5px 15px 5px 19px;
 			justify-content: center;
-			height: 20px;
+			height: 100%;
 			background-color: #e2abab;
+			min-width: 60px;
+			min-width: 50px;
+			
+			svg{
+				height: 100%;
+				width: 100%;
+			}
 		}
 
 		.pronunciation-audio {
 			color: #000;
 			background-color: #e8cd7d;
+			cursor: pointer;
 		}
 
 		.play-audio {
@@ -37,10 +45,7 @@
 			margin-right: 0;
 			background-color: #b9ffe5;
 			margin-left: auto;
-
-			.icon {
-				cursor: pointer;
-			}
+			cursor: pointer;
 		}
 	}
 }
