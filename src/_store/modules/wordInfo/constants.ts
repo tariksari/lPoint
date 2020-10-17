@@ -1,4 +1,3 @@
-export const WORD_GET = 'WORD_GET';
 export const WORD_REQUEST = 'WORD_REQUEST';
 export const WORD_RESPONSE = 'WORD_RESPONSE';
 export const WORD_REQUEST_ERROR = 'WORD_REQUEST_ERROR';
