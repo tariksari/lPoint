@@ -226,7 +226,7 @@ export class Menubar extends EventEmitter {
 
 		let trayImage =
 			this._options.icon ||
-			path.join(this._options.dir, 'IconTemplate.png');
+			path.join(this._options.dir, 'status-bar.png');
 			
 		if (typeof trayImage === 'string' && !fs.existsSync(trayImage)) {
 			trayImage = path.join(
@@ -235,7 +235,7 @@ export class Menubar extends EventEmitter {
 				'src',
 				'assets',
 				'app',
-				'IconTemplate.png'
+				'status-bar.png'
 			); // Default cat icon
 		}
 
@@ -329,6 +329,9 @@ export class Menubar extends EventEmitter {
 		if (this._options.showOnAllWorkspaces !== false) {
 			this._browserWindow.setVisibleOnAllWorkspaces(true);
 		}
+
+		this._browserWindow.setVisibleOnAllWorkspaces(true);
+
 
 		this._browserWindow.on('close', this.windowClear.bind(this));
 
