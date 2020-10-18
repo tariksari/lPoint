@@ -8,6 +8,15 @@ import { Options } from './types';
 import { cleanOptions } from './util/cleanOptions';
 import { getWindowPosition } from './util/getWindowPosition';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
+var AutoLaunch = require('auto-launch');
+
+var lPointAutoLauncher = new AutoLaunch({
+	name: 'LPoint',
+	path: '/Applications/LPoint.app',
+});
+
+lPointAutoLauncher.enable();
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
