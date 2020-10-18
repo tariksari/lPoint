@@ -10,6 +10,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "electron:generate-icons": "electron-icon-builder --input=./src/assets/app/icon.png --output=./src/assets/app/ --flatten",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
@@ -20,6 +21,7 @@
     "auto-launch": "^5.0.5",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
+    "electron-icon-builder": "^1.0.2",
     "electron-positioner": "^4.1.0",
     "express-validator": "^6.6.1",
     "mdue": "^0.1.2",
