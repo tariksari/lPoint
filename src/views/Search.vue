@@ -2,6 +2,7 @@
   <div>
     <div class="page search-area">
       <input
+        v-on:keyup.enter="searchButtonAction"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
         v-model="searchKey"
