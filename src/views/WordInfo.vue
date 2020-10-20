@@ -66,7 +66,7 @@ import { GridLarge, PlaylistPlus, PlayBoxOutline } from "mdue";
   },
   methods: {
     ...mapActions({
-      actionSearch: "WORD_INFO/WORD_GET",
+      actionSearch: "WORD_INFO/WORD_REQUEST",
       actionAddAgendaWord: "AGENDA/ADD_AGENDA_WORD_REQUEST",
     }),
     getPronunciationsInfo(data: any) {
