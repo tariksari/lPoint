@@ -3,12 +3,18 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import AgendaPage from '../views/Agenda.vue';
 import SearchPage from '../views/Search.vue';
 import WordInfoPage from '../views/WordInfo.vue';
+import WordList from '../views/WordList.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		name: 'Main',
 		component: AgendaPage,
+	},
+	{
+		path: '/word-list',
+		name: 'WordList',
+		component: WordList,
 	},
 	{
 		path: '/word-info/:word',
