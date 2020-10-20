@@ -1,16 +1,15 @@
 import { Application, Request, Response } from 'express';
 import { check } from 'express-validator';
 
-import ConfigHelper from '../_helper/Helper';
 import { ServiceController } from '../controllers/ServiceController';
 
 const WORD_TYPE = ['agenda', 'learned', 'favorite', 'sound'];
 
 export class ServiceRoutes {
 	private serController: ServiceController = new ServiceController();
-	private helper: ConfigHelper = new ConfigHelper();
 
 	public route(app: Application): void {
+
 		app.get(
 			'/api/service/word/:id',
 			check('id').not().isEmpty(),
