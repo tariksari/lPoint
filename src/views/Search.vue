@@ -35,7 +35,7 @@ import { Magnify } from "mdue";
 
 @Options({
   components: {
-    Magnify
+    Magnify,
   },
   data() {
     return {
