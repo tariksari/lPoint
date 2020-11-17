@@ -20,8 +20,8 @@
       <ul>
         <li v-for="(value, key) in this.data" :key="key">
           <router-link :to="'/word-info/' + value.word">
+            {{ value.word }}
             <div class="word-info">{{ value.label }}</div>
-            <div class="score">{{ value.score }}</div>
           </router-link>
         </li>
       </ul>
@@ -46,8 +46,7 @@ import { Magnify } from "mdue";
   watch: {
     getStatus: {
       handler(val) {
-        console.log(val.data.results);
-        this.data = val.data.results;
+        this.data = val.data;
       },
       deep: true,
     },
@@ -64,12 +63,7 @@ import { Magnify } from "mdue";
     searchButtonAction() {
       this.actionSearch(this.searchKey);
     },
-  },
-  created() {
-    setInterval(() => {
-      //	this.searchKey = Math.random();
-    }, 1000);
-  },
+  }
 })
 export default class SearchPage extends Vue {}
 </script>

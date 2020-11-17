@@ -8,20 +8,48 @@
       <div v-for="(value, key) in this.wordData" :key="key.id" class="item">
         <div class="action">
           <div class="box audio">
-            <play-box-outline
-              @click="this.playAudio(value.audio)"
-            ></play-box-outline>
+            <div class="box uk">
+              <play-box-outline
+                class="play"
+                @click="this.playAudio(value.audio_uk)"
+              ></play-box-outline>
+            </div>
+            <div class="box us">
+              <play-box-outline
+                class="play"
+                @click="this.playAudio(value.audio_us)"
+              ></play-box-outline>
+            </div>
           </div>
           <div class="box info">
             <information-variant
-              @click="wordInfo(value.word)"
+              :style="[
+                value.local_meaning ? { color: '#ffd78c' } : { color: '#FFF' },
+              ]"
+              :id="'i-' + key"
+              @click="wordInfoAction(value.word)"
+              @mouseover="mouseEnter"
+              @mouseleave="mouseLeave"
             ></information-variant>
           </div>
-        </div>
+          <div v-if="value.local_meaning" :ref="'i-' + key" class="word-info">
+            {{ value.local_meaning }}
 
-        <div class="name">{{ value.word }}</div>
-        <div class="spell">{{ value.spell }}</div>
-        <div class="type">{{ value.lexical_category }}</div>
+            <ul>
+              <li v-for="(value, key) in wordInfo" :key="key">
+                <div v-if="wordInfo.lenght > 5000">
+                  {{ value.category }}
+                  {{ value.eng }}
+                  {{ value.tur }}
+                  {{ value.type }}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="name pd-left2x">{{ value.word }}</div>
+        <div class="spell pd-left2x">{{ value.spell }}</div>
+        <div class="type pd-left2x">{{ value.lexical_category }}</div>
       </div>
     </div>
   </div>
@@ -46,8 +74,10 @@ import {
   },
   data() {
     return {
+      showModal: false,
+      wordInfo: {},
       wordData: {},
-      currentRoute: "agenda", //this.$route.params.word,
+      currentRoute: "agenda",
       viewType: true,
     };
   },
@@ -57,7 +87,8 @@ import {
     },
     getInfo: {
       handler(val) {
-        console.log(val, "infoooo");
+        this.wordInfo = val.data;
+        console.log(this.wordInfo, "infoooo");
       },
       deep: true,
     },
@@ -80,12 +111,15 @@ import {
       actionAgenda: "AGENDA/AGENDA_GET",
       actionInfo: "TURENG/WORD_INFO_REQUEST",
     }),
-    getPronunciationsInfo(data: any) {
-      if (typeof data.lexicalEntries[0]["entries"] !== "undefined") {
-        return data.lexicalEntries[0]["entries"][0]["pronunciations"][0];
+    mouseEnter: function (el: any) {
+      if (this.$refs[el.target.id]) {
+        this.$refs[el.target.id].classList.add("show");
       }
-
-      return null;
+    },
+    mouseLeave: function (el: any) {
+      if (this.$refs[el.target.id]) {
+        this.$refs[el.target.id].classList.remove("show");
+      }
     },
     playAudio(mediaUrl: string) {
       new Audio(mediaUrl).play();
@@ -93,7 +127,7 @@ import {
     listViewChanger() {
       this.viewType = !this.viewType;
     },
-    wordInfo(word: string) {
+    wordInfoAction(word: string) {
       this.actionInfo(word);
     },
   },
@@ -103,3 +137,4 @@ import {
 })
 export default class WordInfo extends Vue {}
 </script>
+

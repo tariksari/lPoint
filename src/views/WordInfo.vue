@@ -3,30 +3,26 @@
     <div class="page word-info-list">
       <div class="row" v-for="(value, key) in this.wordData" :key="key.id">
         <div class="item name">{{ value.word }}</div>
-        <div
-          class="item pronunciation-spell"
-          v-if="this.getPronunciationsInfo(value)"
-        >
+        <div class="item pronunciation-spell">
           /
-          {{ this.getPronunciationsInfo(value)["phoneticSpelling"] }}/ :
+          {{ value.phonetic_spelling }}/ :
         </div>
-        <div
-          class="item pronunciation-audio"
-          v-if="this.getPronunciationsInfo(value)"
-        >
-          <a
-            @click="
-              this.playAudio(this.getPronunciationsInfo(value)['audioFile'])
-            "
-          >
+        <div class="item pronunciation-audio uk">
+          <a @click="this.playAudio(value.audio_uk)">
             <play-box-outline></play-box-outline>
           </a>
         </div>
-        <div class="item word-action">
+        <div class="item pronunciation-audio us">
+          <a @click="this.playAudio(value.audio_us)">
+            <play-box-outline></play-box-outline>
+          </a>
+        </div>
+        <div class="item word-action" v-if="!getButtonStatus">
           <a @click="this.addAgendaWord(value)">
             <playlist-plus></playlist-plus>
           </a>
         </div>
+        <div class="item word-action" v-else><check></check></div>
       </div>
     </div>
   </div>
@@ -34,12 +30,13 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
-import { GridLarge, PlaylistPlus, PlayBoxOutline } from "mdue";
+import { GridLarge, PlaylistPlus, PlayBoxOutline, Check } from "mdue";
 
 @Options({
   components: {
     PlayBoxOutline,
     PlaylistPlus,
+    Check
   },
   data() {
     return {
@@ -53,8 +50,7 @@ import { GridLarge, PlaylistPlus, PlayBoxOutline } from "mdue";
     },
     getWord: {
       handler(val) {
-        console.log(val);
-        this.wordData = val.data.results;
+        this.wordData = val.data;
       },
       deep: true,
     },
@@ -62,6 +58,7 @@ import { GridLarge, PlaylistPlus, PlayBoxOutline } from "mdue";
   computed: {
     ...mapGetters({
       getWord: "WORD_INFO/getData",
+      getButtonStatus: "AGENDA/getButtonStatus",
     }),
   },
   methods: {
@@ -69,25 +66,19 @@ import { GridLarge, PlaylistPlus, PlayBoxOutline } from "mdue";
       actionSearch: "WORD_INFO/WORD_REQUEST",
       actionAddAgendaWord: "AGENDA/ADD_AGENDA_WORD_REQUEST",
     }),
-    getPronunciationsInfo(data: any) {
-      if (typeof data.lexicalEntries[0]["entries"] !== "undefined") {
-        return data.lexicalEntries[0]["entries"][0]["pronunciations"][0];
-      }
-
-      return null;
-    },
     playAudio(mediaUrl: string) {
       new Audio(mediaUrl).play();
     },
     addAgendaWord(data: any) {
-      let wordInfo = this.getPronunciationsInfo(data);
-
       let AgendaWordAttributes = {
         type: "agenda",
         word: data.word,
-        lexical_category: data.lexicalEntries[0]["lexicalCategory"].text,
-        audio: wordInfo["audioFile"],
-        spell: wordInfo["phoneticSpelling"],
+        lexical_category: data.type,
+        local_meaning: data.local_meaning,
+        audio_uk: data.audio_uk,
+        audio_us: data.audio_us,
+        spell: data.phonetic_spelling,
+        word_info: data.word_info,
       };
 
       this.actionAddAgendaWord(AgendaWordAttributes);
