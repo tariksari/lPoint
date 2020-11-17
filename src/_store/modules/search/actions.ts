@@ -5,7 +5,7 @@ import {types} from '../../types'
 
 export default {
 	[CONSTANTS.WORD_SEARCH_GET]: ({ commit, dispatch }:types, word:string) => {
-			Axios.get('search/' + word)
+			Axios.get('cam/'+word+'/search')
 				.then((resp) => {
 					commit(CONSTANTS.WORD_SEARCH_RESPONSE, resp);
 				})

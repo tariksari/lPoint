@@ -6,5 +6,5 @@ export default {
 	},
 	[CONSTANTS.WORD_REQUEST_ERROR]: (state: any, err: string) => {
 		state.error = err;
-	},
+	}
 };
