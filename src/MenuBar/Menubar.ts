@@ -1,4 +1,4 @@
-import { BrowserWindow, Tray } from 'electron';
+import { BrowserWindow, Tray, nativeTheme } from 'electron';
 import Positioner from 'electron-positioner';
 import { EventEmitter } from 'events';
 import fs from 'fs';
@@ -8,17 +8,10 @@ import { Options } from './types';
 import { cleanOptions } from './util/cleanOptions';
 import { getWindowPosition } from './util/getWindowPosition';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-var AutoLaunch = require('auto-launch');
-
-var lPointAutoLauncher = new AutoLaunch({
-	name: 'LPoint',
-	path: '/Applications/LPoint.app',
-});
-
-lPointAutoLauncher.enable();
-
+let AutoLaunch = require('auto-launch');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const APP_PATH = "/Applications/LPoint.app";
 
 /**
  * The main Menubar class.
@@ -212,8 +205,16 @@ export class Menubar extends EventEmitter {
 		this.emit('after-show');
 		return;
 	}
-
+	
 	private async appReady(): Promise<void> {
+
+		let lPointAutoLauncher = new AutoLaunch({
+			name: 'LPoint',
+			path: APP_PATH,
+		});
+		
+		lPointAutoLauncher.enable();
+
 		if (this.app.dock && !this._options.showDockIcon) {
 			this.app.dock.hide();
 		}
@@ -229,15 +230,15 @@ export class Menubar extends EventEmitter {
 			path.join(this._options.dir, 'status-bar.png');
 			
 		if (typeof trayImage === 'string' && !fs.existsSync(trayImage)) {
-			trayImage = path.join(
-				__dirname,
-				'..',
-				'src',
-				'assets',
-				'app',
-				'status-bar.png'
-			); // Default cat icon
+			trayImage = this.trayIconSelectorByTheme()
 		}
+
+		nativeTheme.on('updated', () => {
+			this._tray?.destroy();
+			this._tray = new Tray(this.trayIconSelectorByTheme());
+
+			this.tray.on('click', this.clicked.bind(this));
+		});
 
 		const defaultClickEvent = this._options.showOnRightClick
 			? 'right-click'
@@ -267,6 +268,20 @@ export class Menubar extends EventEmitter {
 		}
 
 		this.emit('ready');
+	}
+
+	/**
+	 * Try Icon Icon Selector
+	 */
+	private trayIconSelectorByTheme(){
+		return path.join(
+			__dirname,
+			'..',
+			'src',
+			'assets',
+			'app',
+			nativeTheme.shouldUseDarkColors ? 'status-bar-white.@2x.png' : 'status-bar.@2x.png'
+		); 
 	}
 
 	/**
@@ -331,7 +346,6 @@ export class Menubar extends EventEmitter {
 		}
 
 		this._browserWindow.setVisibleOnAllWorkspaces(true);
-
 
 		this._browserWindow.on('close', this.windowClear.bind(this));
 
