@@ -13,4 +13,7 @@ export default {
 	[CONSTANTS.ADD_AGENDA_WORD_ERROR]: (state:any, err:string) => {
 		state.data = err;
 	},
+	[CONSTANTS.ADD_WORD_BUTTON_STATUS]: (state: any, status: boolean) => {
+		state.buttonStatus = status;
+	},
 };
