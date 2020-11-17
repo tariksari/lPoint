@@ -31,8 +31,11 @@ export class ServiceRoutes {
 			check('type').not().isEmpty().isIn(WORD_TYPE),
 			check('word').not().isEmpty(),
 			check('lexical_category').not().isEmpty(),
-			check('audio').not().isEmpty(),
+			check('local_meaning').not().isEmpty(),
+			check('audio_uk').not().isEmpty(),
+			check('audio_us').not().isEmpty(),
 			check('spell').not().isEmpty(),
+			check('word_info').not().isEmpty(),
 			(req: Request, res: Response) => {
 				this.serController.addWord(req, res);
 			}
@@ -51,9 +54,12 @@ export class ServiceRoutes {
 
 				return true;
 			}),
+			check('local_meaning').not().isEmpty(),
 			check('lexical_category').not().isEmpty(),
-			check('audio').not().isEmpty(),
+			check('audio_uk').not().isEmpty(),
+			check('audio_us').not().isEmpty(),
 			check('spell').not().isEmpty(),
+			check('word_info').not().isEmpty(),
 			(req: Request, res: Response) => {
 				this.serController.updateWord(req, res);
 			}
