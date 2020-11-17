@@ -88,13 +88,11 @@ import {
     getInfo: {
       handler(val) {
         this.wordInfo = val.data;
-        console.log(this.wordInfo, "infoooo");
       },
       deep: true,
     },
     getWord: {
       handler(val) {
-        console.log(val);
         this.wordData = val.data;
       },
       deep: true,
