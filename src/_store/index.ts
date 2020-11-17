@@ -1,10 +1,4 @@
-import { createApp } from 'vue';
-import Vuex from 'vuex';
-
-const app = createApp({});
-
-// @ts-ignore
-app.use(Vuex);
+import { createStore } from 'vuex';
 
 const requireContext = require.context('./modules', true, /.*\index.ts$/);
 
@@ -21,7 +15,7 @@ const modules = requireContext
 		return modules;
 	}, {});
 
-export default new Vuex.Store({
+export default createStore({
 	strict: process.env.NODE_ENV !== 'production',
 	modules,
 });
