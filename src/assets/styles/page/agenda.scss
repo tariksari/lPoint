@@ -28,13 +28,37 @@
 		margin: 2px 1px 10px 1px;
 		text-align: center;
 
+		.pd-left2x {
+			padding-left: 20px !important;
+		}
+
 		.name {
 			font-size: 17px;
 			background-color: $middle-grey;
 			padding: 5px 0 5px 0;
 		}
+
 		.spell {
 			font-size: 15px;
+		}
+
+		.word-info {
+			position: absolute;
+			background-color: #19202d;
+			display: none;
+			width: 122px;
+			height: auto;
+			padding: 5px;
+   			color: #fff;
+    		border: solid 1px #a0aec0;
+			margin-top: 100%;
+            margin-left: 20px;
+			font-size: 13px;
+			word-break: break-word;
+		}
+
+		.show {
+			display: block !important;
 		}
 
 		.action {
@@ -50,19 +74,19 @@
 				float: left;
 			}
 
-			svg {
-				cursor: pointer;
-				position: absolute;
-				top: 50%;
-				-webkit-transform:translate(6%, -53%);
-				transform: translate(6%, -53%);
-			}
-
 			.info {
 				background-color: #1a202c;
 				color: #fff;
 				width: 100%;
 				height: 40.5px;
+
+				svg {
+					cursor: pointer;
+					position: absolute;
+					top: 50%;
+					-webkit-transform: translate(6%, -53%);
+					transform: translate(6%, -53%);
+				}
 			}
 			.audio {
 				background-color: #4a5568;
@@ -70,6 +94,25 @@
 				width: 100%;
 				height: 40.5px;
 
+				.play {
+					font-size: 13px;
+					margin: 4px auto;
+				}
+
+				.box {
+					margin: 0 auto;
+					width: 100%;
+					height: 20px;
+					cursor: pointer;
+				}
+
+				.uk {
+					background-color: #2567b9;
+				}
+
+				.us {
+					background-color: #a91a1a;
+				}
 			}
 		}
 
