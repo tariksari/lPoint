@@ -8,7 +8,7 @@
     "language app"
   ],
   "scripts": {
-    "dev:express": "nodemon  ./src/_express/main.ts --experimental-modules",
+    "express:dev": "nodemon  ./src/_express/main.ts --experimental-modules",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "electron:generate-icons": "electron-icon-builder --input=./src/assets/app/icon.png --output=./src/assets/app/ --flatten",
