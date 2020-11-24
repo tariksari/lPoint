@@ -25,4 +25,13 @@ export default {
                 setTimeout(() => commit(CONSTANTS.ADD_WORD_BUTTON_STATUS, false), 3000);
             });
     },
+    [CONSTANTS.UDPATE_AGENDA_WORD_REQUEST]: ({commit, dispatch}: types, formData: object) => {
+        Axios.put('service/word', formData)
+            .then((resp) => {
+                //commit(CONSTANTS.UPDATE_AGENDA_WORD_RESPONSE, resp);
+            })
+            .catch((err) => {
+                commit(CONSTANTS.UPDATE_AGENDA_WORD_ERROR, err.status);
+            });
+    },
 };
