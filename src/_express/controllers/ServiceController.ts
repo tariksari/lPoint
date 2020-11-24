@@ -3,11 +3,6 @@ import { Request, Response } from 'express';
 import WordRepository from '../_Repository/WordRepository';
 import ResponseService from '../_Services/ResponseService';
 
-interface word {
-	_id: string;
-	type: string;
-}
-
 export class ServiceController {
 	private WordRepo: WordRepository = new WordRepository();
 	public resService: ResponseService = new ResponseService();
@@ -47,7 +42,7 @@ export class ServiceController {
 	}
 
 	/**
-	 * Get Word
+	 * Add Word
 	 * @param req
 	 * @param res
 	 */
@@ -64,7 +59,7 @@ export class ServiceController {
 	}
 
 	/**
-	 * Get Word
+	 * Update Word Data
 	 * @param req
 	 * @param res
 	 */
@@ -78,5 +73,27 @@ export class ServiceController {
 			.catch((err) => {
 				this.resService.errorResponse(err, res);
 			});
+	}
+
+		/**
+	 * Uodate Word Order
+	 * @param req
+	 * @param res
+	 */
+	public updateWordOrder(req: Request, res: Response): void {
+		this.resService.checkValidation(req, res);
+
+		try {
+			if(Object.keys(req.body.items).length){
+				req.body.items.forEach((item:any) => {
+					this.WordRepo.updateWordOrder(item.id,item.order)
+				})
+			}
+
+			this.resService.successResponse({}, res);
+
+		  } catch(err) {
+			this.resService.errorResponse(err, res);
+		}
 	}
 }

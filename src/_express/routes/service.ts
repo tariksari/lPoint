@@ -59,5 +59,25 @@ export class ServiceRoutes {
 				this.serController.updateWord(req, res);
 			}
 		);
+
+		app.put(
+			'/api/service/word/order',
+			check('id').not().isEmpty(),
+			check('items').not().isEmpty(),
+			check('type').custom((value) => {
+				if (typeof value !== 'undefined') {
+					if (value.length > 0) {
+						if (!WORD_TYPE.includes(value)) {
+							return Promise.reject(value + ' Invalid Type');
+						}
+					}
+				}
+
+				return true;
+			}),
+			(req: Request, res: Response) => {
+				this.serController.updateWordOrder(req, res);
+			}
+		);
 	}
 }
