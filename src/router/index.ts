@@ -12,11 +12,6 @@ const routes: Array<RouteRecordRaw> = [
 		component: AgendaPage,
 	},
 	{
-		path: '/word-list',
-		name: 'WordList',
-		component: WordList,
-	},
-	{
 		path: '/word-info/:word',
 		name: 'WordInfo',
 		component: WordInfoPage,
