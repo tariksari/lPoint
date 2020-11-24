@@ -5,6 +5,7 @@ import mutations from './mutations';
 const state = {
 	data: {},
 	buttonStatus: false,
+	error: '',
 };
 
 export default {
