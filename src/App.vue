@@ -1,7 +1,6 @@
 <template>
   <div id="nav">
     <router-link to="/">AGENDA</router-link>
-    <router-link to="/word-list">WORD LIST</router-link>
     <router-link to="/search">SEARCH WORD</router-link>
   </div>
   <load-bar></load-bar>
