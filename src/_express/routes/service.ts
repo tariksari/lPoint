@@ -43,6 +43,7 @@ export class ServiceRoutes {
 
 		app.put(
 			'/api/service/word',
+			check('id').not().isEmpty(),
 			check('type').custom((value) => {
 				if (typeof value !== 'undefined') {
 					if (value.length > 0) {
@@ -54,12 +55,6 @@ export class ServiceRoutes {
 
 				return true;
 			}),
-			check('local_meaning').not().isEmpty(),
-			check('lexical_category').not().isEmpty(),
-			check('audio_uk').not().isEmpty(),
-			check('audio_us').not().isEmpty(),
-			check('spell').not().isEmpty(),
-			check('word_info').not().isEmpty(),
 			(req: Request, res: Response) => {
 				this.serController.updateWord(req, res);
 			}
