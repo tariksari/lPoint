@@ -1,6 +1,8 @@
-import Aganda from '../_Models/Word';
+import Word from '../_Models/Word';
 
-interface word {
+interface WordInfo {
+    id?: string,
+    order?: Number
     type: string;
     lexical_category: string;
     word: string;
@@ -8,34 +10,34 @@ interface word {
     audio_uk: string;
     audio_us: string;
     spell: string;
-    word_info: object
+    word_info: object;
 }
 
 export default class WordRepository {
-    private agenda: Aganda = new Aganda();
+    private word: Word = new Word();
 
     /**
      * Add Word Data
-     * @param data
+     * @param id
      */
     public async getWordById(id: string): Promise<string[]> {
-        return await this.agenda.collection().findOne({_id: id});
+        return await this.word.collection().findOne({_id: id});
     }
 
     /**
      * Add Word Data
-     * @param data
+     * @param wordType
      */
     public async getAllWordByType(wordType: string): Promise<string[]> {
-        return await this.agenda.collection().find({type: wordType});
+        return this.word.collection().find({type: wordType});
     }
 
     /**
      * Add Word Data
      * @param data
      */
-    public async addWordData(data: word): Promise<word> {
-        return await this.agenda.collection().insert<word>({
+    public async addWordData(data: WordInfo): Promise<WordInfo> {
+        return await this.word.collection().insert<WordInfo>({
             type: data.type,
             lexical_category: data.lexical_category,
             word: data.word,
@@ -51,19 +53,33 @@ export default class WordRepository {
      * Add Word Data
      * @param data
      */
-    public async updateWord(data: word): Promise<number> {
-        return await this.agenda.collection().update(
-            {_id: 'DBu2wQLpitq31P19'},
+    public async updateWord(data: WordInfo): Promise<number> {
+        return await this.word.collection().update(
+            {_id: data.id},
             {
-                type: data.type,
-                lexical_category: data.lexical_category,
-                word: data.word,
-                local_meaning: data.local_meaning,
-                audio_uk: data.audio_uk,
-                audio_us: data.audio_us,
-                spell: data.spell,
-                word_info: data.word_info
-            }
+                $set: {
+                    type: data.type,
+                    lexical_category: data.lexical_category,
+                    word: data.word,
+                    local_meaning: data.local_meaning,
+                    audio_uk: data.audio_uk,
+                    audio_us: data.audio_us,
+                    spell: data.spell,
+                    word_info: data.word_info
+                }
+            }, {multi: true}
+        );
+    }
+
+    /**
+     * Update Order Word
+     * @param id
+     * @param order
+     */
+    public async updateWordOrder(id: string, order: Number): Promise<number> {
+        return await this.word.collection().update(
+            {_id: id},
+            {$set: {order: order}}, {multi: true}
         );
     }
 }
