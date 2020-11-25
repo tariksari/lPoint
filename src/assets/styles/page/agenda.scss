@@ -50,12 +50,13 @@
 			width: 122px;
 			height: auto;
 			padding: 5px;
-   			color: #fff;
-    		border: solid 1px #a0aec0;
+			color: #fff;
+			border: solid 1px #a0aec0;
 			margin-top: 100%;
-            margin-left: 20px;
+			margin-left: 20px;
 			font-size: 13px;
 			word-break: break-word;
+			z-index: 9999;
 		}
 
 		.show {
