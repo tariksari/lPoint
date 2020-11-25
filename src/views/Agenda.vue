@@ -1,9 +1,21 @@
 <template>
   <div>
-    <div
-      :class="[viewType ? 'grid' : 'list', 'page agenda-list']"
-      draggable="true"
-    >
+    <div class="page search-area">
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        v-model="searchText"
+      />
+
+      <button
+        @click="this.searchText = ''"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+      >
+        <text-box-remove-outline></text-box-remove-outline>
+        <span> CLEAR</span>
+      </button>
+    </div>
+    <div :class="[viewType ? 'grid' : 'list', 'page agenda-list']">
       <div class="view-type-button" @click="this.listViewChanger()">
         <format-list-bulleted v-if="viewType"></format-list-bulleted>
         <grid-large v-else></grid-large>
@@ -14,8 +26,8 @@
         tag="transition-group"
         :component-data="{ name: 'fade' }"
         item-key="_id"
-        :sort="true"
-        @change="log"
+        :sort="draggableStatus"
+        @change="dragDrop"
       >
         <template #item="{ element }">
           <div class="item">
@@ -41,15 +53,14 @@
                       ? { color: '#ffd78c' }
                       : { color: '#FFF' },
                   ]"
-                  :id="'i-' + element._id"
+                  :id="element._id"
+                  v-tooltip=""
                   @click="wordInfoAction(element.word)"
-                  @mouseover="mouseEnter"
-                  @mouseleave="mouseLeave"
                 ></information-variant>
               </div>
               <div
                 v-if="element.local_meaning"
-                :ref="'i-' + element._id"
+                :id="'tooltip-' + element._id"
                 class="word-info"
               >
                 {{ element.local_meaning }}
@@ -85,7 +96,9 @@ import {
   FormatListBulleted,
   PlayBoxOutline,
   InformationVariant,
+  TextBoxRemoveOutline,
 } from "mdue";
+import { privateDecrypt } from "crypto";
 
 @Options({
   components: {
@@ -94,15 +107,7 @@ import {
     PlayBoxOutline,
     InformationVariant,
     draggable,
-  },
-  data() {
-    return {
-      showModal: false,
-      wordInfo: [],
-      wordData: [],
-      currentRoute: "agenda",
-      viewType: true,
-    };
+    TextBoxRemoveOutline,
   },
   watch: {
     "$route.params.word": function (par) {
@@ -114,65 +119,103 @@ import {
       },
       deep: true,
     },
+    searchText: {
+      handler(text) {
+        this.draggableStatus = !text;
+        this.searchWord(text);
+      },
+      deep: true,
+    },
     getWord: {
       handler(val) {
-        let data = JSON.parse(JSON.stringify(val.data));
-
-        this.wordData = data.sort(function (a: any, b: any) {
+        let shortedWord = JSON.parse(JSON.stringify(val.data)).sort(function (
+          a: any,
+          b: any
+        ) {
           return a.order - b.order;
         });
+
+        this.wordData = shortedWord;
+        this.allWord = shortedWord;
       },
       deep: true,
     },
   },
   computed: {
     ...mapGetters({
-      getWord: "AGENDA/getData",
+      getWord: "WORD/getData",
       getInfo: "TURENG/getData",
     }),
   },
   methods: {
-    log(evt: any, www: any) {
-      if (evt.moved) {
-        evt.moved.element.order = evt.moved.newIndex;
-
-        this.wordData.forEach((data: any, key: number) => {
-          this.actionAgendaUpdate({
-            id: data._id,
-            order: key,
-          });
-        });
-      }
-    },
     ...mapActions({
-      actionAgenda: "AGENDA/AGENDA_GET",
-      actionAgendaUpdate: "AGENDA/UDPATE_AGENDA_WORD_REQUEST",
+      actionGetWord: "WORD/WORD_REQUEST",
+      actionUpdateWordOrder: "WORD/UPDATE_WORD_ORDER_REQUEST",
       actionInfo: "TURENG/WORD_INFO_REQUEST",
     }),
-    mouseEnter: function (el: any) {
-      if (this.$refs[el.target.id]) {
-        this.$refs[el.target.id].classList.add("show");
-      }
-    },
-    mouseLeave: function (el: any) {
-      if (this.$refs[el.target.id]) {
-        this.$refs[el.target.id].classList.remove("show");
-      }
-    },
-    playAudio(mediaUrl: string) {
-      new Audio(mediaUrl).play();
-    },
-    listViewChanger() {
-      this.viewType = !this.viewType;
-    },
-    wordInfoAction(word: string) {
-      this.actionInfo(word);
-    },
-  },
-  created() {
-    this.actionAgenda(this.currentRoute);
   },
 })
-export default class WordInfo extends Vue {}
+export default class WordInfo extends Vue {
+  viewType: boolean = true;
+  wordInfo: Array<object> = [];
+  wordData: Array<object> = [];
+  allWord: Array<object> = [];
+  showModal: boolean = false;
+  currentRoute: string = "agenda";
+  searchText: string = "";
+  actionGetWord: any;
+  actionUpdateWordOrder: any;
+  actionInfo: any;
+  getWord: any;
+  getInfo: any;
+  draggableStatus: boolean = true;
+
+  private listViewChanger(): void {
+    this.viewType = !this.viewType;
+  }
+
+  private searchWord(text: string) {
+    let vm = this;
+
+    if (!vm.searchText) {
+      vm.wordData = vm.allWord;
+      return [];
+    }
+
+    this.wordData = vm.allWord.filter((value: any) => {
+      return (
+        value.word.toLowerCase().indexOf(vm.searchText.toLowerCase()) != -1
+      );
+    });
+  }
+
+  private playAudio(mediaUrl: string) {
+    new Audio(mediaUrl).play();
+  }
+
+  private wordInfoAction(word: string) {
+    this.actionInfo(word);
+  }
+
+  private dragDrop(el: any) {
+    if (el.moved) {
+      el.moved.element.order = el.moved.newIndex;
+      let vm = this;
+
+      let sortedItems = this.wordData.map(function (val: any, index: Number) {
+        return {
+          id: val._id,
+          order: index,
+        };
+      });
+
+      vm.actionUpdateWordOrder({ items: sortedItems });
+    }
+  }
+
+  created() {
+    this.actionGetWord(this.currentRoute);
+  }
+}
 </script>
 
