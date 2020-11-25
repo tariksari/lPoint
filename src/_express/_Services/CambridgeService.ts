@@ -40,7 +40,7 @@ export default class LexicoService {
                 if (word.length > 0) {
                     let type = $(".pos.dpos").text(),
                         phoneticSpelling = $(".ipa.dipa").text(),
-                        TurkishMeaning = $(".trans.dtrans.dtrans-se").eq(0).text().replace(/\s/g, ''),
+                        TurkishMeaning = $(".trans.dtrans.dtrans-se").eq(0).text().trim(),
                         audioUk = "https://dictionary.cambridge.org" + $("#ampaudio1").children().eq(1).attr("src"),
                         audioUs = "https://dictionary.cambridge.org" + $("#ampaudio2").children().eq(1).attr("src"),
                         wordDataEl = $(".irreg-infls.hdib.dinfls").find(".inf-group.dinfg"),
