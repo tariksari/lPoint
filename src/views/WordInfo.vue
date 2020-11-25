@@ -22,27 +22,23 @@
             <playlist-plus></playlist-plus>
           </a>
         </div>
-        <div class="item word-action" v-else><check></check></div>
+        <div class="item word-action" v-else>
+          <check></check>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { mapActions, mapGetters } from "vuex";
-import { GridLarge, PlaylistPlus, PlayBoxOutline, Check } from "mdue";
+import {Options, Vue} from "vue-class-component";
+import {mapActions, mapGetters} from "vuex";
+import {GridLarge, PlaylistPlus, PlayBoxOutline, Check} from "mdue";
 
 @Options({
   components: {
     PlayBoxOutline,
     PlaylistPlus,
-    Check
-  },
-  data() {
-    return {
-      wordData: {},
-      currentRoute: this.$route.params.word,
-    };
+    Check,
   },
   watch: {
     "$route.params.word": function (par) {
@@ -58,35 +54,44 @@ import { GridLarge, PlaylistPlus, PlayBoxOutline, Check } from "mdue";
   computed: {
     ...mapGetters({
       getWord: "WORD_INFO/getData",
-      getButtonStatus: "AGENDA/getButtonStatus",
+      getButtonStatus: "WORD/getButtonStatus",
     }),
   },
   methods: {
     ...mapActions({
       actionSearch: "WORD_INFO/WORD_REQUEST",
-      actionAddAgendaWord: "AGENDA/ADD_AGENDA_WORD_REQUEST",
+      actionAddWord: "WORD/ADD_WORD_REQUEST",
     }),
-    playAudio(mediaUrl: string) {
-      new Audio(mediaUrl).play();
-    },
-    addAgendaWord(data: any) {
-      let AgendaWordAttributes = {
-        type: "agenda",
-        word: data.word,
-        lexical_category: data.type,
-        local_meaning: data.local_meaning,
-        audio_uk: data.audio_uk,
-        audio_us: data.audio_us,
-        spell: data.phonetic_spelling,
-        word_info: data.word_info,
-      };
-
-      this.actionAddAgendaWord(AgendaWordAttributes);
-    },
-  },
-  created() {
-    this.actionSearch(this.currentRoute);
   },
 })
-export default class WordInfo extends Vue {}
+export default class WordInfo extends Vue {
+  wordData: object = {};
+  currentRoute: any;
+  actionSearch: any;
+  actionAddWord: any;
+
+  private playAudio(mediaUrl: string) {
+    new Audio(mediaUrl).play();
+  }
+
+  private addAgendaWord(data: any) {
+    let AgendaWordAttributes = {
+      type: "agenda",
+      word: data.word,
+      lexical_category: data.type,
+      local_meaning: data.local_meaning,
+      audio_uk: data.audio_uk,
+      audio_us: data.audio_us,
+      spell: data.phonetic_spelling,
+      word_info: data.word_info,
+    };
+
+    this.actionAddWord(AgendaWordAttributes);
+  }
+
+  created() {
+    this.currentRoute = this.$route.params.word;
+    this.actionSearch(this.currentRoute);
+  }
+}
 </script>
