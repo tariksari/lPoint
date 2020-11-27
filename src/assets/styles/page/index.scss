@@ -9,19 +9,8 @@ body {
 	outline: none !important;
 }
 
-#nav {
-	padding: 18px 0 18px 0;
-	background-color: $middle-grey;
-
-	a {
-		color: #eeeeee;
-		padding: 20px 10px 20px 10px;
-		text-decoration: none;
-		font-size: 13px;
-		font-family: sans-serif;
-		border-right: 1px solid $pale-silver;
-	}
-
+nav {
+	background-color: #9a9998;
 	.router-link-active {
 		background-color: $dark-lava;
 	}
