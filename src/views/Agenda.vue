@@ -1,15 +1,36 @@
 <template>
   <div>
+    <div>
+      <vue-final-modal
+        v-model="showModal"
+        v
+        classes="modal-container"
+        content-class="modal-content"
+        :escToClose="true"
+      >
+        <button class="modal__close" @click="showModal = false">
+          <close class="text-red-600"></close>
+        </button>
+        <span class="modal__title text-yellow-500">{{ modalHeaderText }}</span>
+        <div class="modal__content">
+          <div v-for="info in wordInfo" :key="info" class="flex flex-row">
+            <div class="info-box text-red-400 flex-none">{{ info.category }} - {{ info.type }}</div>
+            <div class="pl-3">{{ info.tur }}</div>
+          </div>
+        </div>
+      </vue-final-modal>
+    </div>
+
     <div class="page search-area">
       <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="shadow-2xl shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
         v-model="searchText"
       />
 
       <button
         @click="this.searchText = ''"
-        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+        class="transition duration-500 ease-in-out transform  hover:-translate-x-1 hover:scale-120 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
       >
         <text-box-remove-outline></text-box-remove-outline>
         <span> CLEAR</span>
@@ -55,7 +76,12 @@
                   ]"
                   :id="element._id"
                   v-tooltip=""
-                  @click="wordInfoAction(element.word)"
+                  @click="
+                    wordInfoAction(
+                      element.word,
+                      (modalHeaderText = element.word)
+                    )
+                  "
                 ></information-variant>
               </div>
               <div
@@ -64,17 +90,6 @@
                 class="word-info"
               >
                 {{ element.local_meaning }}
-
-                <ul>
-                  <li v-for="(value, key) in wordInfo" :key="key">
-                    <div v-if="wordInfo.lenght > 5000">
-                      {{ value.category }}
-                      {{ value.eng }}
-                      {{ value.tur }}
-                      {{ value.type }}
-                    </div>
-                  </li>
-                </ul>
               </div>
             </div>
             <div class="name pd-left2x">{{ element.word }}</div>
@@ -97,6 +112,7 @@ import {
   PlayBoxOutline,
   InformationVariant,
   TextBoxRemoveOutline,
+  Close,
 } from "mdue";
 import { privateDecrypt } from "crypto";
 
@@ -108,14 +124,16 @@ import { privateDecrypt } from "crypto";
     InformationVariant,
     draggable,
     TextBoxRemoveOutline,
+    Close,
   },
   watch: {
     "$route.params.word": function (par) {
       this.currentRoute = par;
     },
-    getInfo: {
+    getTurengWordInfo: {
       handler(val) {
         this.wordInfo = val.data;
+        this.showModal = true;
       },
       deep: true,
     },
@@ -144,7 +162,7 @@ import { privateDecrypt } from "crypto";
   computed: {
     ...mapGetters({
       getWord: "WORD/getData",
-      getInfo: "TURENG/getData",
+      getTurengWordInfo: "TURENG/getData",
     }),
   },
   methods: {
@@ -161,6 +179,7 @@ export default class WordInfo extends Vue {
   wordData: Array<object> = [];
   allWord: Array<object> = [];
   showModal: boolean = false;
+  modalHeaderText: string = "true";
   currentRoute: string = "agenda";
   searchText: string = "";
   actionGetWord: any;
@@ -218,4 +237,3 @@ export default class WordInfo extends Vue {
   }
 }
 </script>
-
