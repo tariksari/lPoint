@@ -18,23 +18,50 @@
 			background-color: #e2abab;
 			min-width: 60px;
 			min-width: 50px;
-			
-			svg{
+
+			svg {
 				height: 100%;
 				width: 100%;
 			}
 		}
 
-		.us{
-			background-color: #6bbbff;
+		.word-info {
+			position: absolute;
+			background-color: $bg-5;
+			display: none;
+			width: 122px;
+			height: auto;
+			padding: 5px;
+			color: #fff;
+			border: solid 1px #a0aec0;
+			margin-top: -34px;
+			margin-left: 32px;
+			font-size: 13px;
+			word-break: break-word;
+			z-index: 9999;
 		}
 
-		.uk{
-			background-color: #eaeaea;
+		.show {
+			display: block !important;
+		}
+
+		.us {
+			background-color: $us-bg;
+			cursor: pointer;
+		}
+
+		.uk {
+			background-color: $uk-bg;
+			cursor: pointer;
 		}
 
 		.pronunciation-audio {
-			color: #000;
+			color: white;
+		}
+
+		.local-meaning {
+			background-color: $bg-5;
+			color: white;
 			cursor: pointer;
 		}
 

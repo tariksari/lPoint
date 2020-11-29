@@ -17,6 +17,16 @@
             <play-box-outline></play-box-outline>
           </a>
         </div>
+        <div class="item local-meaning">
+          <information-variant v-tooltip="" :id="key"></information-variant>
+          <div
+            v-if="value.local_meaning"
+            :id="'tooltip-' + key"
+            class="word-info"
+          >
+            {{ value.local_meaning }}
+          </div>
+        </div>
         <div class="item word-action" v-if="!getButtonStatus">
           <a @click="this.addAgendaWord(value)">
             <playlist-plus></playlist-plus>
@@ -30,15 +40,22 @@
   </div>
 </template>
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import {mapActions, mapGetters} from "vuex";
-import {GridLarge, PlaylistPlus, PlayBoxOutline, Check} from "mdue";
+import { Options, Vue } from "vue-class-component";
+import { mapActions, mapGetters } from "vuex";
+import {
+  GridLarge,
+  PlaylistPlus,
+  PlayBoxOutline,
+  Check,
+  InformationVariant,
+} from "mdue";
 
 @Options({
   components: {
     PlayBoxOutline,
     PlaylistPlus,
     Check,
+    InformationVariant,
   },
   watch: {
     "$route.params.word": function (par) {
