@@ -1,10 +1,15 @@
+$app-max-width: 600px;
+$bg-5: #353d4e;
+$uk-bg: #5888c3;
+$us-bg: #af4a4a;
+
 /* SCSS RGB */
 $dark-lava: rgb(72 71 70 / 82%);
 $middle-grey: rgba(138, 129, 124, 1);
 $pale-silver: rgba(188, 184, 177, 1);
 $alabaster: rgba(244, 243, 238, 1);
 $melon: rgba(224, 175, 160, 1);
-$white:#ffff;
+$white: #ffff;
 
 /* SCSS Gradient */
 $gradient-top: linear-gradient(0deg, #463f3aff, #8a817cff, #bcb8b1ff, #f4f3eeff, #e0afa0ff);

@@ -2,15 +2,19 @@
 	display: flex;
 	flex-wrap: wrap;
 	position: relative;
-	padding-top: 10px;
+	padding-top: 5px;
 
 	.view-type-button {
 		position: absolute;
-		right: 5px;
+		right: 35px;
 		top: -105px;
 		color: #000000;
 		font-size: 25px;
 		cursor: pointer;
+
+		svg {
+			position: fixed;
+		}
 	}
 
 	flex: 1 0 50%;
@@ -45,7 +49,7 @@
 
 		.word-info {
 			position: absolute;
-			background-color: #19202d;
+			background-color: $bg-5;
 			display: none;
 			width: 122px;
 			height: auto;
@@ -77,7 +81,7 @@
 			}
 
 			.info {
-				background-color: #1a202c;
+				background-color: $bg-5;
 				color: #fff;
 				width: 100%;
 				height: 40.5px;
@@ -91,7 +95,7 @@
 				}
 			}
 			.audio {
-				background-color: #4a5568;
+				background-color: $bg-5;
 				color: #fff;
 				width: 100%;
 				height: 40.5px;
@@ -109,11 +113,11 @@
 				}
 
 				.uk {
-					background-color: #2567b9;
+					background-color: $uk-bg;
 				}
 
 				.us {
-					background-color: #a91a1a;
+					background-color: $us-bg;
 				}
 			}
 		}
@@ -135,7 +139,7 @@
 	justify-content: center;
 	align-items: center;
 }
- .modal-content {
+.modal-content {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -146,7 +150,7 @@
 	border-radius: 0.25rem;
 	color: #e2e8f0;
 	border-color: #2d3748 !important;
-	background-color: #1a202c;
+	background-color: $bg-5;
 }
 .modal__title {
 	margin: 0 2rem 0 0;

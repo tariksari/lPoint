@@ -14,7 +14,9 @@
         <span class="modal__title text-yellow-500">{{ modalHeaderText }}</span>
         <div class="modal__content">
           <div v-for="info in wordInfo" :key="info" class="flex flex-row">
-            <div class="info-box text-red-400 flex-none">{{ info.category }} - {{ info.type }}</div>
+            <div class="info-box text-red-400 flex-none">
+              {{ info.category }} - {{ info.type }}
+            </div>
             <div class="pl-3">{{ info.tur }}</div>
           </div>
         </div>
@@ -30,14 +32,14 @@
 
       <button
         @click="this.searchText = ''"
-        class="transition duration-500 ease-in-out transform  hover:-translate-x-1 hover:scale-120 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+        class="transition duration-500 ease-in-out transform hover:-translate-x-1 hover:scale-120 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
       >
         <text-box-remove-outline></text-box-remove-outline>
         <span> CLEAR</span>
       </button>
     </div>
     <div :class="[viewType ? 'grid' : 'list', 'page agenda-list']">
-      <div class="view-type-button" @click="this.listViewChanger()">
+      <div class="view-type-button z-50" @click="this.listViewChanger()">
         <format-list-bulleted v-if="viewType"></format-list-bulleted>
         <grid-large v-else></grid-large>
       </div>

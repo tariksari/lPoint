@@ -1,5 +1,5 @@
 <template>
-  <nav class="shadow-2xl shadow-inner">
+  <nav class="shadow-2xl shadow-inner fixed z-20">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
@@ -20,7 +20,7 @@
     </div>
   </nav>
   <load-bar></load-bar>
-  <router-view />
+  <router-view class="pt-16" />
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
