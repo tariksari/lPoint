@@ -10,8 +10,12 @@
               >AGENDA</router-link
             >
             <router-link
+              v-bind:class="{
+                'router-link-active': this.$route.name == 'WordInfo',
+              }"
               class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white"
               to="/search"
+              exact
               >SEARCH WORD</router-link
             >
           </div>
