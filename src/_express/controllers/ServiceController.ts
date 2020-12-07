@@ -75,8 +75,25 @@ export class ServiceController {
 			});
 	}
 
-		/**
-	 * Uodate Word Order
+	/**
+	 * Delete Word
+	 * @param req
+	 * @param res
+	 */
+	public deleteWord(req: Request, res: Response): void {
+		this.resService.checkValidation(req, res);
+
+		this.WordRepo.deleteWord(req.body)
+			.then((data) => {
+				this.resService.successResponse(data, res);
+			})
+			.catch((err) => {
+				this.resService.errorResponse(err, res);
+			});
+	}
+
+	/**
+	 * Update Word Order
 	 * @param req
 	 * @param res
 	 */

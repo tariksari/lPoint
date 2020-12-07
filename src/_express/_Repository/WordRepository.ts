@@ -72,6 +72,17 @@ export default class WordRepository {
     }
 
     /**
+     * Delete Word
+     * @param id
+     * @param order
+     */
+    public async deleteWord(id: string): Promise<number> {
+        return await this.word.collection().remove(
+            {_id: id},{}
+        );
+    }
+
+    /**
      * Update Order Word
      * @param id
      * @param order

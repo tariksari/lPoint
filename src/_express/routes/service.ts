@@ -60,6 +60,14 @@ export class ServiceRoutes {
 			}
 		);
 
+		app.delete(
+			'/api/service/word/:id',
+			check('id').not().isEmpty(),
+			(req: Request, res: Response) => {
+				this.serController.deleteWord(req, res);
+			}
+		);
+
 		app.put(
 			'/api/service/word/order',
 			check('items').not().isEmpty(),
