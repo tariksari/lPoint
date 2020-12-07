@@ -13,7 +13,7 @@
         class="transition duration-500 ease-in-out transform hover:-translate-x-1 hover:scale-120 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
       >
         <magnify></magnify>
-        <span>Search</span>
+        <span>SEARCH</span>
       </button>
     </div>
     <div class="page search-result">
