@@ -22,4 +22,7 @@ export default {
 	[CONSTANTS.ADD_WORD_BUTTON_STATUS]: (state: any, status: boolean) => {
 		state.buttonStatus = status;
 	},
+	[CONSTANTS.CHANGE_WORD_BUTTON_STATUS]: (state: any, status: boolean) => {
+		state.buttonStatus = status;
+	},
 };

@@ -20,9 +20,9 @@
         <div class="item local-meaning">
           <information-variant v-tooltip="" :id="key"></information-variant>
           <div
-            v-if="value.local_meaning"
-            :id="'tooltip-' + key"
-            class="word-info"
+              v-if="value.local_meaning"
+              :id="'tooltip-' + key"
+              class="word-info"
           >
             {{ value.local_meaning }}
           </div>
@@ -40,8 +40,8 @@
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { mapActions, mapGetters } from "vuex";
+import {Options, Vue} from "vue-class-component";
+import {mapActions, mapGetters} from "vuex";
 import {
   GridLarge,
   PlaylistPlus,
@@ -78,6 +78,7 @@ import {
     ...mapActions({
       actionSearch: "WORD_INFO/WORD_REQUEST",
       actionAddWord: "WORD/ADD_WORD_REQUEST",
+      actionButtonStatus: "WORD/CHANGE_WORD_BUTTON_STATUS_ACTION",
     }),
   },
 })
@@ -86,6 +87,8 @@ export default class WordInfo extends Vue {
   currentRoute: any;
   actionSearch: any;
   actionAddWord: any;
+  actionButtonStatus: any;
+
 
   private playAudio(mediaUrl: string) {
     new Audio(mediaUrl).play();
@@ -104,6 +107,10 @@ export default class WordInfo extends Vue {
     };
 
     this.actionAddWord(AgendaWordAttributes);
+  }
+
+  mounted() {
+    this.actionButtonStatus(false)
   }
 
   created() {

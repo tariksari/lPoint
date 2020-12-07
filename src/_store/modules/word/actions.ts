@@ -50,4 +50,7 @@ export default {
                 commit(CONSTANTS.DELETE_WORD_ERROR, err.status);
             });
     },
+    [CONSTANTS.CHANGE_WORD_BUTTON_STATUS_ACTION]: ({commit, dispatch}: types, status: boolean) => {
+        commit(CONSTANTS.CHANGE_WORD_BUTTON_STATUS, status);
+    },
 };
