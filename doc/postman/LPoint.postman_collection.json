@@ -1,0 +1,739 @@
+{
+	"info": {
+		"_postman_id": "4d6559cd-703c-4992-9302-f9349d7a9b13",
+		"name": "LPoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Add Word",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "agenda",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "https://audio.oxforddictionaries.com/en/mp3/run_gb_3.mp3",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "/ rʌn/ :",
+									"type": "text"
+								},
+								{
+									"key": "lexical_category",
+									"value": "verb",
+									"type": "text"
+								},
+								{
+									"key": "word",
+									"value": "run",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/service/word",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Word",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "local_meaning",
+									"value": "şikayetetmek, yakınmak, dertlenmek",
+									"type": "text"
+								},
+								{
+									"key": "lexical_category",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "agenda",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "1111",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "0zRZDf6BEYwOqFc1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/service/word",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Word",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/service/word/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Word Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": 1,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order\": 1\n            },\n            {\n                \"id\": 2,\n                \"order\": 2\n            }\n        ]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/service/word/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Word By Type ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/service/word/agenda/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word",
+								"agenda",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Word By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/service/word/DBu2wQLpitq31P19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"service",
+								"word",
+								"DBu2wQLpitq31P19"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c825ec0a-529f-4937-82b2-29ecf6734d25",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0dedd5f3-f2e6-4019-b60d-133ad087b984",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Api OXford",
+			"item": [
+				{
+					"name": "Get Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/word/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"word",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/search/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"search",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sentences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/sentences/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"sentences",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inflections",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/Inflections/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"Inflections",
+								"run"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ebdd0345-b5c7-43ad-b185-60fc9909a62c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "465c7082-7044-4199-a005-d542217ed775",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tureng",
+			"item": [
+				{
+					"name": "Get Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/tureng/-",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"tureng",
+								"-"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "efe13850-194c-4684-9fc1-dd6892a93218",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae67347f-2098-481d-8cfa-60403564bd63",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cambridge",
+			"item": [
+				{
+					"name": "Get Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/cam/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"cam",
+								"run"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/cam/run/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"cam",
+								"run",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ec9307ee-5559-4c19-9ba6-074ff57d9cab",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "73e57fe9-0771-4d0b-b515-0117065ad744",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lexico",
+			"item": [
+				{
+					"name": "Get Word",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "audio",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "spell",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/lex/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"lex",
+								"run"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3f738f99-4ca6-42ad-bf69-538467ad76c5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4fd12aa2-6b02-40c5-bb6a-2ded1978283a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0911f9b9-6076-4a90-8f17-f12f91cf9647",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0663a1e3-0b1e-4c63-9780-840b7c39d9d0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
