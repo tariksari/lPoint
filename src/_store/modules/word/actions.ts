@@ -46,7 +46,6 @@ export default {
             .then((resp) => {
             })
             .catch((err) => {
-                console.log(err)
                 commit(CONSTANTS.DELETE_WORD_ERROR, err.status);
             });
     },
