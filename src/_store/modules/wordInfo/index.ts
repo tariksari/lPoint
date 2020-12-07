@@ -3,14 +3,14 @@ import getters from './getters';
 import mutations from './mutations';
 
 const state = {
-	data: {},
-	err: ''
+    data: {},
+    err: ''
 };
 
 export default {
-	namespaced: true,
-	state,
-	actions,
-	getters,
-	mutations,
+    namespaced: true,
+    state,
+    actions,
+    getters,
+    mutations,
 };

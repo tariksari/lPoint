@@ -1,3 +1,3 @@
 export default {
-	getData: (state:any) => state,
+    getData: (state: any) => state,
 };
