@@ -38,6 +38,7 @@ export default class WordRepository {
      */
     public async addWordData(data: WordInfo): Promise<WordInfo> {
         return await this.word.collection().insert<WordInfo>({
+            order: -1,
             type: data.type,
             lexical_category: data.lexical_category,
             word: data.word,
