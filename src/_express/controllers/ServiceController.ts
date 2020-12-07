@@ -83,7 +83,7 @@ export class ServiceController {
 	public deleteWord(req: Request, res: Response): void {
 		this.resService.checkValidation(req, res);
 
-		this.WordRepo.deleteWord(req.body)
+		this.WordRepo.deleteWord(req.params.id)
 			.then((data) => {
 				this.resService.successResponse(data, res);
 			})
