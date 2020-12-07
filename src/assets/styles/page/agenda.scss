@@ -1,176 +1,171 @@
 .agenda-list {
-	display: flex;
-	flex-wrap: wrap;
-	position: relative;
-	padding-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding-top: 5px;
 
-	.view-type-button {
-		position: absolute;
-		right: 35px;
-		top: -105px;
-		color: #000000;
-		font-size: 25px;
-		cursor: pointer;
+  .view-type-button {
+    position: absolute;
+    right: 35px;
+    top: -105px;
+    color: #000000;
+    font-size: 25px;
+    cursor: pointer;
 
-		svg {
-			position: fixed;
-		}
-	}
+    svg {
+      position: fixed;
+    }
+  }
 
-	flex: 1 0 50%;
+  flex: 1 0 50%;
 
-	.item {
-		position: relative;
-		display: block;
-		flex: 1 0 21%;
-		justify-content: center;
-		font-size: 16px;
-		padding: 1px;
-		background-color: $pale-silver;
-		min-width: 100px;
-		height: auto;
-		margin: 2px 1px 10px 1px;
-		text-align: center;
-		cursor: move;
+  .item {
+    position: relative;
+    display: block;
+    flex: 1 0 21%;
+    justify-content: center;
+    font-size: 16px;
+    padding: 1px;
+    background-color: $pale-silver;
+    min-width: 100px;
+    height: auto;
+    margin: 2px 1px 10px 1px;
+    text-align: center;
+    cursor: move;
 
-		.pd-left2x {
-			padding-left: 20px !important;
-		}
+    .pd-left2x {
+      padding-left: 20px !important;
+    }
 
-		.name {
-			font-size: 17px;
-			background-color: $middle-grey;
-			padding: 5px 0 5px 0;
-		}
+    .name {
+      font-size: 17px;
+      background-color: $middle-grey;
+      padding: 5px 0 5px 0;
+    }
 
-		.spell {
-			font-size: 15px;
-		}
+    .spell {
+      font-size: 15px;
+    }
 
-		.word-info {
-			position: absolute;
-			background-color: $bg-5;
-			display: none;
-			width: 122px;
-			height: auto;
-			padding: 5px;
-			color: #fff;
-			border: solid 1px #a0aec0;
-			margin-top: 100%;
-			margin-left: 20px;
-			font-size: 13px;
-			word-break: break-word;
-			z-index: 9999;
-		}
+    .word-info {
+      position: absolute;
+      background-color: $bg-5;
+      display: none;
+      width: 122px;
+      height: auto;
+      padding: 5px;
+      color: #fff;
+      border: solid 1px #a0aec0;
+      margin-top: 0;
+      margin-left: 20px;
+      font-size: 13px;
+      word-break: break-word;
+      z-index: 9999;
+    }
 
-		.show {
-			display: block !important;
-		}
+    .show {
+      display: block !important;
+    }
 
-		.action {
-			position: absolute;
-			display: block;
-			width: 20px;
-			height: 100%;
-			font-size: 17px;
+    .action {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 100%;
+      font-size: 17px;
 
-			.box {
-				position: relative;
-				display: block;
-				float: left;
-			}
+      .box {
+        position: relative;
+        display: block;
+        float: left;
+        width: 100%;
+        height: 40px;
 
-			.info {
-				background-color: $bg-5;
-				color: #fff;
-				width: 100%;
-				height: 40.5px;
+        svg {
+          font-size: 13px;
+          margin: 3px auto;
+        }
+      }
 
-				svg {
-					cursor: pointer;
-					position: absolute;
-					top: 50%;
-					-webkit-transform: translate(6%, -53%);
-					transform: translate(6%, -53%);
-				}
-			}
-			.audio {
-				background-color: $bg-5;
-				color: #fff;
-				width: 100%;
-				height: 40.5px;
+      .audio {
+        color: #fff;
 
-				.play {
-					font-size: 13px;
-					margin: 4px auto;
-				}
+        .play {
+          font-size: 13px;
+          margin: 4px auto;
+        }
 
-				.box {
-					margin: 0 auto;
-					width: 100%;
-					height: 20px;
-					cursor: pointer;
-				}
+        .box {
+          margin: 0 auto;
+          width: 100%;
+          height: 20px;
+          cursor: pointer;
+        }
 
-				.uk {
-					background-color: $uk-bg;
-				}
+        .uk {
+          background-color: $uk-bg;
+        }
 
-				.us {
-					background-color: $us-bg;
-				}
-			}
-		}
+        .us {
+          background-color: $us-bg;
+        }
+      }
+    }
 
-		.type {
-			font-size: 15px;
-		}
-	}
+    .type {
+      font-size: 15px;
+    }
+  }
 }
 
 .list {
-	.item {
-		flex: 1 0 50% !important;
-	}
+  .item {
+    flex: 1 0 50% !important;
+  }
 }
 
 .modal-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .modal-content {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	max-height: 90%;
-	margin: 0 1rem;
-	padding: 1rem;
-	border: 1px solid #e2e8f0;
-	border-radius: 0.25rem;
-	color: #e2e8f0;
-	border-color: #2d3748 !important;
-	background-color: $bg-5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90%;
+  margin: 0 1rem;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  color: #e2e8f0;
+  border-color: #2d3748 !important;
+  background-color: $bg-5;
 }
+
 .modal__title {
-	margin: 0 2rem 0 0;
-	font-size: 1.5rem;
-	font-weight: 700;
-	color: #fbd38d;
+  margin: 0 2rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fbd38d;
 }
+
 .modal__content {
-	flex-grow: 1;
-	overflow-y: auto;
+  flex-grow: 1;
+  overflow-y: auto;
 }
+
 .modal__action {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-shrink: 0;
-	padding: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1rem 0 0;
 }
+
 .modal__close {
-	position: absolute;
-	top: 0.5rem;
-	right: 0.5rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }

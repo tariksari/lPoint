@@ -27,17 +27,27 @@ export default {
     },
     [CONSTANTS.UPDATE_WORD_REQUEST]: ({commit, dispatch}: types, formData: object) => {
         Axios.put('service/word', formData)
-            .then((resp) => {})
+            .then((resp) => {
+            })
             .catch((err) => {
                 commit(CONSTANTS.UPDATE_WORD_ERROR, err.status);
             });
     },
-
     [CONSTANTS.UPDATE_WORD_ORDER_REQUEST]: ({commit, dispatch}: types, formData: object) => {
         Axios.put('service/word/order', formData)
-            .then((resp) => {})
+            .then((resp) => {
+            })
             .catch((err) => {
                 commit(CONSTANTS.UPDATE_WORD_ORDER_ERROR, err.status);
+            });
+    },
+    [CONSTANTS.DELETE_WORD_REQUEST]: ({commit, dispatch}: types, id: string) => {
+        Axios.delete(`service/word/${id}`)
+            .then((resp) => {
+            })
+            .catch((err) => {
+                console.log(err)
+                commit(CONSTANTS.DELETE_WORD_ERROR, err.status);
             });
     },
 };
