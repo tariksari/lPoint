@@ -276,7 +276,7 @@ export default class Agenda extends Vue {
     let vm = this;
     vm.deleteModalShow = false;
     vm.actionDeleteWord(vm.deleteWordData.id);
-    this.actionGetWord(this.currentRoute);
+    setTimeout(() => this.actionGetWord(this.currentRoute), 500);
   }
 
   private clearDeleteWord() {
