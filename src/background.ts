@@ -1,4 +1,4 @@
-import {menubar} from './MenuBar/index'
+import {menubar} from '@/MenuBar'
 
 const mb =  menubar({showDockIcon:false,showOnAllWorkspaces:true});
 
