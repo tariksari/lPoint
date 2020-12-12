@@ -13,15 +13,14 @@ npm run express:dev # serve Api (Debug and development). dir => _express
 ```
 
 
-Includes the following services
+Includes the following services. However, only Cambridge and Turing services were integrated.
 
 ```bash
- Oxford, Tureng, Cambridge,` Lexico 
+ Oxford, Tureng, Cambridge, Lexico 
  
 ```
-However, only **Cambridge and Turing** services were integrated.
 
-#####  **Not :** See folder **docs/postman** for services
+#####  **Note :** See folder **docs/postman** for services
 
 
 <p align="center">
