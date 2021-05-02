@@ -18,9 +18,9 @@ export default class LexicoService {
 
     /**
      * Search Word
-     * @param req 
+     * @param req
      */
-    public searhWord(req:Request){
+    public searhWord(req: Request) {
         return this.repCam.searchWord(req.params.word);
     }
 
@@ -35,15 +35,15 @@ export default class LexicoService {
                     normalizeWhitespace: true,
                 });
 
-                let word = $(".tw-bw.dhw.dpos-h_hw.di-title").text()
+                let word = $(".headword .hw").first().text()
 
                 if (word.length > 0) {
-                    let type = $(".pos.dpos").text(),
-                        phoneticSpelling = $(".ipa.dipa").text(),
+                    let type = $(".pos.dpos").first().text(),
+                        phoneticSpelling = $(".ipa.dipa").first().text(),
                         TurkishMeaning = $(".trans.dtrans.dtrans-se").eq(0).text().trim(),
                         audioUk = "https://dictionary.cambridge.org" + $("#ampaudio1").children().eq(1).attr("src"),
                         audioUs = "https://dictionary.cambridge.org" + $("#ampaudio2").children().eq(1).attr("src"),
-                        wordDataEl = $(".irreg-infls.hdib.dinfls").find(".inf-group.dinfg"),
+                        wordDataEl = $(".irreg-infls").find(".inf-group"),
                         wordInfo: any = []
 
                     if (wordDataEl.children().length > 0) {
