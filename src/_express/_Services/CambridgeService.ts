@@ -1,7 +1,6 @@
 import {Request} from 'express';
 import * as cheerio from 'cheerio';
 import CambridgeRepository from '../_Repository/CambridgeRepository';
-import {SolderingIron} from 'mdue';
 
 export default class LexicoService {
     private repCam: CambridgeRepository = new CambridgeRepository();
