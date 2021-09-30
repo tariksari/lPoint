@@ -1,4 +1,4 @@
-import {Request} from 'express';
+import { Request } from 'express';
 import * as cheerio from 'cheerio';
 import CambridgeRepository from '../_Repository/CambridgeRepository';
 
@@ -50,7 +50,7 @@ export default class LexicoService {
                             let meaning = $(element).find(".lab.dlab").text();
                             let action = $(element).find(".inf.dinf").text();
 
-                            wordInfo.push({meaning: meaning, action: action});
+                            wordInfo.push({ meaning: meaning, action: action });
                         })
                     }
 

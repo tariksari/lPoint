@@ -10,7 +10,7 @@ export default class CambridgeRepository {
 	 * @param word
 	 */
 	public async getWord(word: string): Promise<string[]> {
-		return await get(this.config.getCambridgeRequestHeader('word',word));
+		return await get(this.config.getCambridgeRequestHeader('word', word));
 	}
 
 	/**
@@ -18,6 +18,6 @@ export default class CambridgeRepository {
 	 * @param word
 	 */
 	public async searchWord(word: string): Promise<string[]> {
-		return await get(this.config.getCambridgeRequestHeader('search',word));
+		return await get(this.config.getCambridgeRequestHeader('search', word));
 	}
 }

@@ -2,7 +2,7 @@ const OX_APP_ID = '20a716c6';
 const OX_APP_KEY = 'ae4da0918c402e8e951fcc969a3584eb';
 const OX_API_PATH = 'https://od-api.oxforddictionaries.com/api/v2/';
 const LEXICO_API = 'https://www.lexico.com/definition/';
-const CAMBRIFGE_API = 'https://dictionary.cambridge.org/dictionary/english-turkish/';
+const CAMBRIFGE_API = 'https://dictionary.cambridge.org/dictionary/english/';
 
 interface Headers {
     app_id: string;
@@ -73,10 +73,10 @@ export default class Helper {
     }
 
     /**
-	 *
-	 * @param api
-	 * @param word
-	 */
+     *
+     * @param api
+     * @param word
+     */
     public getCambridgeRequestHeader(api: string, word: string): head {
 
         let apiUrl = '';
@@ -86,7 +86,7 @@ export default class Helper {
                 apiUrl = CAMBRIFGE_API + word;
                 break;
             case 'search':
-                apiUrl = 'https://dictionary.cambridge.org/autocomplete/amp?dataset=english-turkish&q=' + word + '&__amp_source_origin=https%3A%2F%2Fdictionary.cambridge.org';
+                apiUrl = 'https://dictionary.cambridge.org/autocomplete/amp?dataset=english&q=' + word + '&__amp_source_origin=https%3A%2F%2Fdictionary.cambridge.org';
                 break;
         }
 
