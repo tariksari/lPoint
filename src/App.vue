@@ -28,8 +28,8 @@
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-// @ts-ignore
-import LoadBar from "@/components/LoadBar";
+
+import LoadBar from "@/components/LoadBar.vue";
 
 @Options({
   components: {
