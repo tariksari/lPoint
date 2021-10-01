@@ -63,7 +63,7 @@ export class ServiceController {
 	public async reOrder(@request() req: express.Request, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
 		await this.wordService.reOrder(req.body);
-		res.sendStatus(200);
+		return this.resService.noContentResponse(null, res);
 	}
 
 	@httpPut('/word',
