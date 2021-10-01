@@ -9,14 +9,14 @@ import * as express from "express";
 import WordService from '../_Services/WordService';
 import ResponseService from '../_Services/ResponseService';
 
-const WORD_TYPE = ['agenda', 'learned', 'favorite', 'sound'];
+const WORD_TYPES = ['agenda', 'learned', 'favorite', 'sound'];
 
 @controller('/api/service')
 export class ServiceController {
 	constructor(@inject(TYPES.WordService) private wordService: WordService) { }
 	public resService: ResponseService = new ResponseService();
 
-	@httpGet('/word', check('type').not().isEmpty().isIn(WORD_TYPE))
+	@httpGet('/word', check('type').not().isEmpty().isIn(WORD_TYPES))
 	public index(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
 		return this.wordService.getAllWordByType(req.query.type);
@@ -35,7 +35,7 @@ export class ServiceController {
 	}
 
 	@httpPost('/word',
-		check('type').not().isEmpty().isIn(WORD_TYPE),
+		check('type').not().isEmpty().isIn(WORD_TYPES),
 		check('word').not().isEmpty(),
 		check('lexical_category').not().isEmpty(),
 		check('local_meaning').isEmpty(),
@@ -58,7 +58,7 @@ export class ServiceController {
 	@httpPost('/word/reOrder',
 		check('id').not().isEmpty(),
 		check('order').not().isEmpty(),
-		check('list_type').not().isEmpty().isIn(WORD_TYPE),
+		check('list_type').not().isEmpty().isIn(WORD_TYPES),
 	)
 	public async reOrder(@request() req: express.Request, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
@@ -71,7 +71,7 @@ export class ServiceController {
 		check('type').custom((value) => {
 			if (typeof value !== 'undefined') {
 				if (value.length > 0) {
-					if (!WORD_TYPE.includes(value)) {
+					if (!WORD_TYPES.includes(value)) {
 						return Promise.reject(value + ' Invalid Type');
 					}
 				}
