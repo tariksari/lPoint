@@ -1,18 +1,14 @@
 import {Request} from 'express';
 import * as cheerio from 'cheerio';
-import LexicoRepository from '../_Repository/LexicoRepository';
 
 export default class LexicoService {
-    private repLex: LexicoRepository = new LexicoRepository();
 
     /**
      * get Word Info
      * @param req
      */
     public getWordInfo(req: Request) {
-        let wordInfoBody = this.repLex.getWord(req.params.word);
 
-        return this.parseBody(wordInfoBody)
     }
 
     /**
@@ -52,7 +48,7 @@ export default class LexicoService {
                 for (i = 0; i < numberOfentryGroup; i++) {
     
                     var entry:any = {},
-                        word = $(".hwg .hw")[i].childNodes[0].nodeValue,
+                        word = $(".hwg .hw")[i].childNodes[0],
                         phonetic = $(".pronSection.etym .pron .phoneticspelling")[i],
                         pronunciation = $(".pronSection.etym .pron .speaker")[i],
                         origin = $(".pronSection.etym").eq(i).prev().find(".senseInnerWrapper p").text(),
@@ -66,7 +62,7 @@ export default class LexicoService {
                     entry.type = type;
 
                     if (phonetic) {
-                        entry.phonetic = phonetic.childNodes[0] && phonetic.childNodes[0].data;
+                        entry.phonetic = phonetic.childNodes[0] && phonetic.childNodes[0];
                     }
                     if (pronunciation) {
                         entry.pronunciation = $(pronunciation).find("a audio").attr("src");

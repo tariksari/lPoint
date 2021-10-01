@@ -16,10 +16,11 @@
         <span>SEARCH</span>
       </button>
     </div>
-    <div class="page search-result">
+
+    <div class="page search-result"  v-if="data.length">
       <ul>
         <li v-for="(value, key) in this.data" :key="key">
-          <router-link :to="'/info/' + value.word">
+          <router-link :to="'/info/' + encodeURI(value.word)">
             {{ value.word }}
             <div class="word-info">{{ value.label }}</div>
           </router-link>
@@ -38,7 +39,7 @@ import { Magnify } from "mdue";
     Magnify,
   },
   watch: {
-    getStatus: {
+    getData: {
       handler(val) {
         this.data = val.data;
       },
@@ -47,7 +48,7 @@ import { Magnify } from "mdue";
   },
   computed: {
     ...mapGetters({
-      getStatus: "SEARCH/getData",
+      getData: "SEARCH/getData",
     }),
   },
   methods: {

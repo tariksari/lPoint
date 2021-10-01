@@ -14,6 +14,16 @@ export default class ResponseService {
 	}
 
 	/**
+	 * Response No Content 
+	 * @param data
+	 * @param res
+	 */
+	public noContentResponse(data: any, res: Response): Response {
+		return res.status(responseCode.HTTP_NO_CONTENT).jsonp(data);
+	}
+
+
+	/**
 	 * Response Error
 	 * @param data
 	 * @param res

@@ -1,31 +1,23 @@
-import { Request, Response } from 'express';
+import {
+	controller, httpGet, request, response
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { check } from 'express-validator';
+import TYPES from '../types';
+import * as express from "express";
 
-import ResponseService from '../_Services/ResponseService';
 import TurengService from '../_Services/TurengService';
+import ResponseService from '../_Services/ResponseService';
 
-interface word {
-	_id: string;
-	type: string;
-}
-
+@controller('/api/spy')
 export class TurengController {
-	private turService: TurengService = new TurengService();
+	constructor(@inject(TYPES.TurengService) private turengService: TurengService) { }
+
 	public resService: ResponseService = new ResponseService();
 
-	/**
-	 * Get Word By Id
-	 * @param req
-	 * @param res
-	 */
-	public getWordInfo(req: Request, res: Response): void {
+	@httpGet('/tureng/:word', check('word').not().isEmpty())
+	public index(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
-
-		this.turService.getTurengWordInfo(req)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
+		return this.turengService.getWord(req.params.word);
 	}
 }

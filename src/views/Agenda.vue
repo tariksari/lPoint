@@ -2,35 +2,63 @@
   <div>
     <div>
       <vue-final-modal
-          v-bind="$attrs"
-          classes="modal-container"
-          content-class="modal-content"
-          v-model="deleteModalShow"
-          name="deleteModal"
-          :escToClose="true"
-          @closed="clearDeleteWord"
+        v-bind="$attrs"
+        classes="modal-container"
+        content-class="modal-content"
+        v-model="deleteModalShow"
+        name="deleteModal"
+        :escToClose="true"
+        @closed="clearDeleteWord"
       >
         <div class="modal__content">
-          <slot
-          >
-            Do you want to delete <span class="text-red-400">{{ deleteWordData.word }}</span> ?
-          </slot
-          >
+          <slot>
+            Do you want to delete
+            <span class="text-red-400">{{ wordToBeDelete.word }}</span> ?
+          </slot>
         </div>
         <div class="modal__action">
           <button
-              @click="confirmDeleteWord()"
-              class="transition duration-500 ease-in-out transform hover:-translate-x-1 hover:scale-120 bg-green-500
-               hover:bg-green-800  px-6 py-1 rounded inline-flex items-center text-xs mr-3"
+            @click="confirmDeleteWord()"
+            class="
+              transition
+              duration-500
+              ease-in-out
+              transform
+              hover:-translate-x-1
+              hover:scale-120
+              bg-green-500
+              hover:bg-green-800
+              px-6
+              py-1
+              rounded
+              inline-flex
+              items-center
+              text-xs
+              mr-3
+            "
           >
             <delete-forever-outline></delete-forever-outline>
             <span> YES</span>
           </button>
           <div></div>
           <button
-              @click="clearDeleteWord()"
-              class="transition duration-500 ease-in-out transform hover:-translate-x-1 hover:scale-120 bg-red-500
-               hover:bg-red-800  px-6 py-1 rounded inline-flex items-center text-xs text-white"
+            @click="clearDeleteWord()"
+            class="
+              transition
+              duration-500
+              ease-in-out
+              transform
+              hover:-translate-x-1
+              hover:scale-120
+              bg-red-500
+              hover:bg-red-800
+              px-6
+              py-1
+              rounded
+              inline-flex
+              items-center
+              text-xs text-white
+            "
           >
             <close-box-outline></close-box-outline>
             <span> NO</span>
@@ -39,10 +67,10 @@
       </vue-final-modal>
 
       <vue-final-modal
-          v-model="showModal"
-          classes="modal-container"
-          content-class="modal-content"
-          :escToClose="true"
+        v-model="showModal"
+        classes="modal-container"
+        content-class="modal-content"
+        :escToClose="true"
       >
         <button class="modal__close" @click="showModal = false">
           <close class="text-red-600"></close>
@@ -61,14 +89,42 @@
 
     <div class="page search-area">
       <input
-          class="shadow-2xl shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          v-model="searchText"
+        class="
+          shadow-2xl shadow
+          appearance-none
+          border
+          rounded
+          w-full
+          py-2
+          px-3
+          text-gray-700
+          leading-tight
+          focus:outline-none
+          focus:shadow-outline
+        "
+        type="text"
+        v-model="searchText"
       />
 
       <button
-          @click="this.searchText = ''"
-          class="transition duration-500 ease-in-out transform hover:-translate-x-1 hover:scale-120 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+        @click="this.searchText = ''"
+        class="
+          transition
+          duration-500
+          ease-in-out
+          transform
+          hover:-translate-x-1
+          hover:scale-120
+          bg-gray-300
+          hover:bg-gray-400
+          text-gray-800
+          font-bold
+          py-2
+          px-4
+          rounded
+          inline-flex
+          items-center
+        "
       >
         <text-box-remove-outline></text-box-remove-outline>
         <span> CLEAR</span>
@@ -81,12 +137,13 @@
       </div>
 
       <draggable
-          v-model="wordData"
-          tag="transition-group"
-          :component-data="{ name: 'fade' }"
-          item-key="_id"
-          :sort="draggableStatus"
-          @change="dragDrop"
+        :animation="300"
+        v-model="words"
+        tag="transition-group"
+        :component-data="{ name: 'fade' }"
+        item-key="_id"
+        :sort="draggableStatus"
+        @change="dragDrop"
       >
         <template #item="{ element, index }">
           <div class="item">
@@ -94,25 +151,35 @@
               <div class="box audio">
                 <div class="box uk">
                   <play-box-outline
-                      class="play"
-                      @click="this.playAudio(element.audio_uk)"
+                    class="play"
+                    @click="this.playAudio(element.audio_uk)"
                   ></play-box-outline>
                 </div>
                 <div class="box us">
                   <play-box-outline
-                      class="play"
-                      @click="this.playAudio(element.audio_us)"
+                    class="play"
+                    @click="this.playAudio(element.audio_us)"
                   ></play-box-outline>
                 </div>
               </div>
               <div class="box">
-                <div class="bg-middle-blue hover:bg-middle-dark text-yellow-300 info h-5
-                flex cursor-pointer border-b border-opacity-25 border-black">
+                <div
+                  class="
+                    bg-middle-blue
+                    hover:bg-middle-dark
+                    text-yellow-300
+                    info
+                    h-5
+                    flex
+                    cursor-pointer
+                    border-b border-opacity-25 border-black
+                  "
+                >
                   <information-variant
-                      class="block top-1"
-                      :id="element._id"
-                      v-tooltip=""
-                      @click="
+                    class="block top-1"
+                    :id="element._id"
+                    v-tooltip=""
+                    @click="
                       wordInfoAction(
                         element.word,
                         (modalHeaderText = element.word)
@@ -120,21 +187,23 @@
                     "
                   ></information-variant>
                   <div
-                      v-if="element.local_meaning"
-                      :id="'tooltip-' + element._id"
-                      class="word-info"
+                    v-if="element.local_meaning"
+                    :id="'tooltip-' + element._id"
+                    class="word-info"
                   >
                     {{ element.local_meaning }}
                   </div>
                 </div>
-                <div class="bg-middle-blue hover:bg-middle-dark text-red-200 h-5 ">
+                <div
+                  class="bg-middle-blue hover:bg-middle-dark text-red-200 h-5"
+                >
                   <button
-                      type="button"
-                      class="delete"
-                      id="options-menu"
-                      aria-haspopup="true"
-                      aria-expanded="true"
-                      @click="deleteWord(element._id, element.word, index)"
+                    type="button"
+                    class="delete"
+                    id="options-menu"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                    @click="deleteWord(element._id, element.word, index)"
                   >
                     <delete-forever-outline></delete-forever-outline>
                   </button>
@@ -151,8 +220,8 @@
   </div>
 </template>
 <script lang="ts">
-import {Options, Vue, VueMixin} from "vue-class-component";
-import {mapActions, mapGetters} from "vuex";
+import { Options, Vue, VueMixin } from "vue-class-component";
+import { mapActions, mapGetters } from "vuex";
 import draggable from "vuedraggable";
 
 import {
@@ -163,7 +232,7 @@ import {
   TextBoxRemoveOutline,
   Close,
   DeleteForeverOutline,
-  CloseBoxOutline
+  CloseBoxOutline,
 } from "mdue";
 
 @Options({
@@ -176,7 +245,7 @@ import {
     TextBoxRemoveOutline,
     Close,
     DeleteForeverOutline,
-    CloseBoxOutline
+    CloseBoxOutline,
   },
   watch: {
     "$route.params.word": function (par) {
@@ -198,15 +267,8 @@ import {
     },
     getWord: {
       handler(val) {
-        let shortedWord = JSON.parse(JSON.stringify(val.data)).sort(function (
-            a: any,
-            b: any
-        ) {
-          return a.order - b.order;
-        });
-
-        this.wordData = shortedWord;
-        this.allWord = shortedWord;
+        this.words = val.data;
+        this.wordCollection = val.data;
       },
       deep: true,
     },
@@ -229,8 +291,8 @@ import {
 export default class Agenda extends Vue {
   viewType: boolean = true;
   wordInfo: Array<object> = [];
-  wordData: Array<object> = [];
-  allWord: Array<object> = [];
+  words: Array<object> = [];
+  wordCollection: Array<object> = [];
   showModal: boolean = false;
   modalHeaderText: string = "true";
   currentRoute: string = "agenda";
@@ -243,7 +305,7 @@ export default class Agenda extends Vue {
   getInfo: any;
   draggableStatus: boolean = true;
   deleteModalShow: boolean = false;
-  deleteWordData: {
+  wordToBeDelete: {
     id?: string;
     word?: string;
     index?: Number;
@@ -257,14 +319,16 @@ export default class Agenda extends Vue {
     let vm = this;
 
     if (!vm.searchText) {
-      vm.wordData = vm.allWord;
+      vm.words = vm.wordCollection;
       return [];
     }
 
-    this.wordData = vm.allWord.filter((value: any) => {
-      return (
+    this.words = vm.wordCollection.filter((value: any) => {
+      if (value.word) {
+        return (
           value.word.toLowerCase().indexOf(vm.searchText.toLowerCase()) != -1
-      );
+        );
+      }
     });
   }
 
@@ -275,13 +339,13 @@ export default class Agenda extends Vue {
   private confirmDeleteWord() {
     let vm = this;
     vm.deleteModalShow = false;
-    vm.actionDeleteWord(vm.deleteWordData.id);
+    vm.actionDeleteWord(vm.wordToBeDelete.id);
     setTimeout(() => this.actionGetWord(this.currentRoute), 500);
   }
 
   private clearDeleteWord() {
     this.deleteModalShow = false;
-    this.deleteWordData = {};
+    this.wordToBeDelete = {};
   }
 
   private wordInfoAction(word: string): void {
@@ -290,22 +354,19 @@ export default class Agenda extends Vue {
 
   private deleteWord(id: string, word: string) {
     this.$vfm.show("deleteModal");
-    this.deleteWordData = {id: id, word: word};
+    this.wordToBeDelete = { id: id, word: word };
   }
 
   private dragDrop(el: any) {
     if (el.moved) {
-      el.moved.element.order = el.moved.newIndex;
       let vm = this;
+      let attributes = {
+        id: el.moved.element._id,
+        order: el.moved.newIndex,
+        list_type: "agenda",
+      };
 
-      let sortedItems = this.wordData.map(function (val: any, index: Number) {
-        return {
-          id: val._id,
-          order: index,
-        };
-      });
-
-      vm.actionUpdateWordOrder({items: sortedItems});
+      vm.actionUpdateWordOrder(attributes);
     }
   }
 

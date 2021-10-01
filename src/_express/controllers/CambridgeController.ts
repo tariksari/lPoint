@@ -1,48 +1,30 @@
-import { Request, Response } from 'express';
-import CambridgeService from '../_Services/CambridgeService';
+import {
+	controller, httpGet,request, response
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { check } from 'express-validator';
+import TYPES from '../types';
+import * as express from "express";
 
+import CambridgeService from '../_Services/CambridgeService';
 import ResponseService from '../_Services/ResponseService';
 
-interface word {
-	_id: string;
-	type: string;
-}
 
+@controller('/api/spy')
 export class CambridgeController {
-	private camService: CambridgeService = new CambridgeService();
+	constructor(@inject(TYPES.CambridgeService) private cambridgeService: CambridgeService) { }
+
 	public resService: ResponseService = new ResponseService();
 
-	/**
-	 * Get Word By Id
-	 * @param req
-	 * @param res
-	 */
-	public getWordInfo(req: Request, res: Response): void {
+	@httpGet('/cambridge/:word', check('word').isString())
+	public detail(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
-
-		this.camService.getWordInfo(req)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
+		return this.cambridgeService.getWordDetail(req.params.word);
 	}
 
-	/**
-	 * Get Word By Id
-	 * @param req
-	 * @param res
-	 */
-	public searchWord(req: Request, res: Response): void {
+	@httpGet('/cambridge/:word/autocomplete', check('word').isString())
+	public search(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
-
-		this.camService.searhWord(req)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
+		return this.cambridgeService.getAutocompleteResult(req.params.word);
 	}
 }

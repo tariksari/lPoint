@@ -1,25 +1,29 @@
-import {Request} from 'express';
-import TurengRepository from '../_Repository/TurengRepository';
+import { injectable } from 'inversify';
+import { get, RequestPromise } from 'request-promise';
 import * as cheerio from 'cheerio';
 
+const TURENG_API = 'http://tureng.com/en/turkish-english/';
+
+@injectable()
 export default class TurengService {
-    private repTureng: TurengRepository = new TurengRepository();
 
     /**
-     * get Word Info
-     * @param req
+     * 
+     * @param word 
+     * @returns 
      */
-    public getTurengWordInfo(req: Request) {
-        let wordInfoBody = this.repTureng.getWordInfo(req.params.word);
+    public async getWord(word: string) {
+        let respData = get(TURENG_API + encodeURIComponent(word));
 
-        return this.parseBody(wordInfoBody)
+        return this.parseBody(respData)
     }
 
     /**
-     * parseBody
-     * @param body
+     * 
+     * @param body 
+     * @returns 
      */
-    protected parseBody(body: Promise<string[]>): Promise<Array<object>> {
+    private parseBody(body: RequestPromise<any>): Promise<Array<object>> {
         return new Promise(function (resolve) {
             body.then((bodyData: any) => {
                 let allWord: Array<object> = [];

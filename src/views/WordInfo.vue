@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page word-info-list">
+    <div class="page word-info-list" v-if="wordData[0].hasOwnProperty('word')">
       <div class="row" v-for="(value, key) in this.wordData" :key="key.id">
         <div class="item name">{{ value.word }}</div>
         <div class="item pronunciation-spell">
@@ -20,9 +20,9 @@
         <div class="item local-meaning">
           <information-variant v-tooltip="" :id="key"></information-variant>
           <div
-              v-if="value.local_meaning"
-              :id="'tooltip-' + key"
-              class="word-info"
+            v-if="value.local_meaning"
+            :id="'tooltip-' + key"
+            class="word-info"
           >
             {{ value.local_meaning }}
           </div>
@@ -40,8 +40,8 @@
   </div>
 </template>
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import {mapActions, mapGetters} from "vuex";
+import { Options, Vue } from "vue-class-component";
+import { mapActions, mapGetters } from "vuex";
 import {
   GridLarge,
   PlaylistPlus,
@@ -83,12 +83,11 @@ import {
   },
 })
 export default class WordInfo extends Vue {
-  wordData: object = {};
+  wordData: Array<object> = [{}];
   currentRoute: any;
   actionSearch: any;
   actionAddWord: any;
   actionButtonStatus: any;
-
 
   private playAudio(mediaUrl: string) {
     new Audio(mediaUrl).play();
@@ -110,7 +109,7 @@ export default class WordInfo extends Vue {
   }
 
   mounted() {
-    this.actionButtonStatus(false)
+    this.actionButtonStatus(false);
   }
 
   created() {

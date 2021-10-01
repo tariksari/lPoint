@@ -1,33 +1,39 @@
-import { Request } from 'express';
+import { injectable } from 'inversify';
+import { get, RequestPromise } from 'request-promise';
+
 import * as cheerio from 'cheerio';
-import CambridgeRepository from '../_Repository/CambridgeRepository';
 
-export default class LexicoService {
-    private repCam: CambridgeRepository = new CambridgeRepository();
+const CAMBRIFGE_API = 'https://dictionary.cambridge.org/dictionary/english/';
+
+@injectable()
+export default class CambridgeService {
 
     /**
-     * get Word Info
-     * @param req
+     * 
+     * @param word 
+     * @returns 
      */
-    public getWordInfo(req: Request) {
-        let wordInfoBody = this.repCam.getWord(req.params.word);
+    public async getWordDetail(word: string) {
+        let responseBody = get(CAMBRIFGE_API + word);
 
-        return this.parseBody(wordInfoBody)
+        return this.parseBody(responseBody)
     }
 
     /**
-     * Search Word
-     * @param req
+     * 
+     * @param word 
+     * @returns 
      */
-    public searhWord(req: Request) {
-        return this.repCam.searchWord(req.params.word);
+    public async getAutocompleteResult(word: string) {
+        return get("https://dictionary.cambridge.org/autocomplete/amp?dataset=english&q=" + word + "&__amp_source_origin=https%3A%2F%2Fdictionary.cambridge.org");
     }
 
     /**
-     * parseBody
-     * @param body
+     * 
+     * @param body 
+     * @returns 
      */
-    protected parseBody(body: Promise<string[]>): Promise<Array<object>> {
+    protected parseBody(body: RequestPromise<string[]>): Promise<Array<object>> {
         return new Promise(function (resolve) {
             body.then((bodyData: any) => {
                 let $ = cheerio.load(bodyData, {

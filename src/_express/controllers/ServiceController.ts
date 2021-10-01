@@ -1,116 +1,101 @@
-import { Request, Response } from 'express';
+import {
+	controller, httpGet, httpPost, httpPut, httpDelete, request, response
+} from 'inversify-express-utils';
+import { inject } from 'inversify';
+import { check } from 'express-validator';
+import TYPES from '../types';
+import * as express from "express";
 
-import WordRepository from '../_Repository/WordRepository';
+import WordService from '../_Services/WordService';
 import ResponseService from '../_Services/ResponseService';
 
+const WORD_TYPE = ['agenda', 'learned', 'favorite', 'sound'];
+
+@controller('/api/service')
 export class ServiceController {
-	private WordRepo: WordRepository = new WordRepository();
+	constructor(@inject(TYPES.WordService) private wordService: WordService) { }
 	public resService: ResponseService = new ResponseService();
 
-	/**
-	 * Get Word By Id
-	 * @param req
-	 * @param res
-	 */
-	public getWordById(req: Request, res: Response): void {
+	@httpGet('/word', check('type').not().isEmpty().isIn(WORD_TYPE))
+	public index(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
-
-		this.WordRepo.getWordById(req.params.id)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
+		return this.wordService.getAllWordByType(req.query.type);
 	}
 
-	/**
-	 * Get Word
-	 * @param req
-	 * @param res
-	 */
-	public getWordByType(req: Request, res: Response): void {
-		this.resService.checkValidation(req, res);
-
-		this.WordRepo.getAllWordByType(req.params.wordType)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
-	}
-
-	/**
-	 * Add Word
-	 * @param req
-	 * @param res
-	 */
-	public addWord(req: Request, res: Response): void {
-		this.resService.checkValidation(req, res);
-
-		this.WordRepo.addWordData(req.body)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
-	}
-
-	/**
-	 * Update Word Data
-	 * @param req
-	 * @param res
-	 */
-	public updateWord(req: Request, res: Response): void {
-		this.resService.checkValidation(req, res);
-
-		this.WordRepo.updateWord(req.body)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
-	}
-
-	/**
-	 * Delete Word
-	 * @param req
-	 * @param res
-	 */
-	public deleteWord(req: Request, res: Response): void {
-		this.resService.checkValidation(req, res);
-
-		this.WordRepo.deleteWord(req.params.id)
-			.then((data) => {
-				this.resService.successResponse(data, res);
-			})
-			.catch((err) => {
-				this.resService.errorResponse(err, res);
-			});
-	}
-
-	/**
-	 * Update Word Order
-	 * @param req
-	 * @param res
-	 */
-	public updateWordOrder(req: Request, res: Response): void {
+	@httpGet('/word/:id', check('id').not().isEmpty())
+	public async show(@request() req: any, @response() res: express.Response) {
 		this.resService.checkValidation(req, res);
 
 		try {
-			if(Object.keys(req.body.items).length){
-				req.body.items.forEach((item:any) => {
-					this.WordRepo.updateWordOrder(item.id,item.order)
-				})
-			}
-
-			this.resService.successResponse({}, res);
-
-		  } catch(err) {
+			const word = await this.wordService.getWordById(req.params.id);
+			return this.resService.successResponse(word, res);
+		} catch (err) {
 			this.resService.errorResponse(err, res);
 		}
+	}
+
+	@httpPost('/word',
+		check('type').not().isEmpty().isIn(WORD_TYPE),
+		check('word').not().isEmpty(),
+		check('lexical_category').not().isEmpty(),
+		check('local_meaning').isEmpty(),
+		check('audio_uk').not().isEmpty(),
+		check('audio_us').not().isEmpty(),
+		check('spell').not().isEmpty(),
+	)
+	public async store(@request() req: express.Request, @response() res: express.Response) {
+		this.resService.checkValidation(req, res);
+
+		try {
+			let word = await this.wordService.addWord(req.body);
+
+			return this.resService.successResponse(word, res);
+		} catch (err) {
+			this.resService.errorResponse(err, res);
+		}
+	}
+
+	@httpPost('/word/reOrder',
+		check('id').not().isEmpty(),
+		check('order').not().isEmpty(),
+		check('list_type').not().isEmpty().isIn(WORD_TYPE),
+	)
+	public async reOrder(@request() req: express.Request, @response() res: express.Response) {
+		this.resService.checkValidation(req, res);
+		await this.wordService.reOrder(req.body);
+		res.sendStatus(200);
+	}
+
+	@httpPut('/word',
+		check('id').not().isEmpty(),
+		check('type').custom((value) => {
+			if (typeof value !== 'undefined') {
+				if (value.length > 0) {
+					if (!WORD_TYPE.includes(value)) {
+						return Promise.reject(value + ' Invalid Type');
+					}
+				}
+			}
+
+			return true;
+		})
+	)
+	public async update(@request() req: express.Request, @response() res: express.Response) {
+		this.resService.checkValidation(req, res);
+
+		await this.wordService.updateWord(req.body);
+		res.sendStatus(200);
+	}
+
+	@httpDelete('/word/:id', check('id').not().isEmpty(),)
+	public async destroy(@request() req: any, @response() res: express.Response) {
+		this.resService.checkValidation(req, res);
+
+		if (await this.wordService.deleteWord(req.params.id)) {
+			return this.resService.noContentResponse(null, res);
+
+		}
+
+		this.resService.errorResponse(null, res);
 	}
 }

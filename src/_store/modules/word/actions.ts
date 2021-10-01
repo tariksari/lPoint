@@ -1,10 +1,10 @@
 import Axios from '@/_utils/http-client';
-import {types} from '../../types';
+import { types } from '../../types';
 import * as CONSTANTS from './constants';
 
 export default {
-    [CONSTANTS.WORD_REQUEST]: ({commit, dispatch}: types, wordType: string) => {
-        Axios.get('service/word/' + wordType + '/all')
+    [CONSTANTS.WORD_REQUEST]: ({ commit, dispatch }: types, wordType: string) => {
+        Axios.get('service/word?type=' + wordType + '')
             .then((resp) => {
                 commit(CONSTANTS.WORD_RESPONSE, resp);
             })
@@ -12,7 +12,7 @@ export default {
                 commit(CONSTANTS.WORD_ERROR, err.status);
             });
     },
-    [CONSTANTS.ADD_WORD_REQUEST]: ({commit, dispatch}: types, formData: object) => {
+    [CONSTANTS.ADD_WORD_REQUEST]: ({ commit, dispatch }: types, formData: object) => {
         commit(CONSTANTS.ADD_WORD_BUTTON_STATUS, true);
 
         Axios.post('service/word', formData)
@@ -25,7 +25,7 @@ export default {
                 setTimeout(() => commit(CONSTANTS.ADD_WORD_BUTTON_STATUS, false), 3000);
             });
     },
-    [CONSTANTS.UPDATE_WORD_REQUEST]: ({commit, dispatch}: types, formData: object) => {
+    [CONSTANTS.UPDATE_WORD_REQUEST]: ({ commit, dispatch }: types, formData: object) => {
         Axios.put('service/word', formData)
             .then((resp) => {
             })
@@ -33,15 +33,16 @@ export default {
                 commit(CONSTANTS.UPDATE_WORD_ERROR, err.status);
             });
     },
-    [CONSTANTS.UPDATE_WORD_ORDER_REQUEST]: ({commit, dispatch}: types, formData: object) => {
-        Axios.put('service/word/order', formData)
+    [CONSTANTS.UPDATE_WORD_ORDER_REQUEST]: ({ commit, dispatch }: types, formData: object) => {
+        Axios.post('service/word/reOrder', formData)
             .then((resp) => {
+                console.log(resp)
             })
             .catch((err) => {
                 commit(CONSTANTS.UPDATE_WORD_ORDER_ERROR, err.status);
             });
     },
-    [CONSTANTS.DELETE_WORD_REQUEST]: ({commit, dispatch}: types, id: string) => {
+    [CONSTANTS.DELETE_WORD_REQUEST]: ({ commit, dispatch }: types, id: string) => {
         Axios.delete(`service/word/${id}`)
             .then((resp) => {
             })
@@ -49,7 +50,7 @@ export default {
                 commit(CONSTANTS.DELETE_WORD_ERROR, err.status);
             });
     },
-    [CONSTANTS.CHANGE_WORD_BUTTON_STATUS_ACTION]: ({commit, dispatch}: types, status: boolean) => {
+    [CONSTANTS.CHANGE_WORD_BUTTON_STATUS_ACTION]: ({ commit, dispatch }: types, status: boolean) => {
         commit(CONSTANTS.CHANGE_WORD_BUTTON_STATUS, status);
     },
 };
