@@ -1,6 +1,6 @@
 {
   "name": "LPoint",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "MacOs Vocabulary app helps you learn and organize English words efficiently.",
   "author": "T.SARI <info@tariksari.com>",
@@ -12,6 +12,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "electron:generate-icons": "electron-icon-builder --input=./src/assets/app/icon.png --output=./src/assets/app/ --flatten",
+    "lint": "vue-cli-service lint",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
@@ -19,48 +20,86 @@
   },
   "main": "background.js",
   "dependencies": {
-    "@jood/v-modal": "^0.3.2",
+    "@types/cors": "^2.8.12",
     "auto-launch": "^5.0.5",
-    "axios": "^0.21.1",
-    "cheerio": "^1.0.0-rc.3",
+    "axios": "^0.23.0",
+    "cheerio": "^1.0.0-rc.10",
+    "core-js": "^3.6.5",
     "cors": "^2.8.5",
-    "electron-icon-builder": "^1.0.2",
     "electron-positioner": "^4.1.0",
-    "express-validator": "^6.7.0",
-    "inversify": "^5.1.1",
-    "inversify-express-utils": "^6.3.2",
-    "mdue": "^0.1.2",
+    "express-validator": "^6.13.0",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.2",
+    "mdue": "^0.1.4",
     "nedb-promises": "^5.0.1",
-    "proxy-middleware": "^0.15.0",
     "reflect-metadata": "^0.1.13",
     "request-promise": "^4.2.6",
-    "tailwindcss": "^1.9.6",
-    "v-autocomplete": "^1.8.2",
-    "vue": "^3.0.3",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-final-modal": "^1.6.1",
-    "vue-material-design-icons": "^4.11.0",
-    "vue-router": "^4.0.0-rc.5",
-    "vuedraggable": "^4.0.0",
-    "vuex": "^4.0.0-rc.2"
+    "vue": "^3.0.0",
+    "vue-class-component": "^8.0.0-0",
+    "vue-final-modal": "^3.4.3",
+    "vue-router": "^4.0.0-0",
+    "vuedraggable": "^4.1.0",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.22",
-    "@types/node": "^14.14.10",
-    "@types/request-promise": "^4.1.46",
-    "@vue/cli-plugin-router": "^4.5.9",
-    "@vue/cli-plugin-typescript": "^4.5.9",
-    "@vue/cli-plugin-vuex": "^4.5.9",
-    "@vue/cli-service": "^4.5.9",
-    "@vue/compiler-sfc": "^3.0.3",
-    "babel-plugin-component": "^1.1.1",
-    "electron": "^10.1.6",
-    "electron-devtools-installer": "^3.1.1",
-    "node-sass": "^4.9.2",
-    "sass": "^1.29.0",
+    "@types/auto-launch": "^5.0.2",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/request-promise": "^4.1.48",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "^9.8.8",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0",
+    "postcss": "^7.0.39",
+    "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3",
-    "vue-cli-plugin-electron-builder": "^2.0.0-rc.5",
-    "vue-cli-plugin-element": "~1.0.1"
-  }
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "typescript": "~4.1.5",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/typescript/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "rules": {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": [
+        "off"
+      ],
+      "@typescript-eslint/no-this-alias": [
+        "error",
+        {
+          "allowDestructuring": true,
+          "allowedNames": [
+            "vm",
+            "this"
+          ]
+        }
+      ]
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
