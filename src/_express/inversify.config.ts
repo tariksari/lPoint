@@ -7,7 +7,7 @@ import WordService from './_Services/WordService';
 import TurengService from './_Services/TurengService';
 import CambridgeService from './_Services/CambridgeService';
 
-let container = new Container();
+const container = new Container();
 
 container.bind<SqliteClient>(TYPES.SqliteClient).to(SqliteClient);
 container.bind<WordService>(TYPES.WordService).to(WordService);

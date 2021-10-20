@@ -4,12 +4,12 @@ import * as CONSTANTS from './constants';
 import { types } from '../../types'
 
 export default {
-	[CONSTANTS.WORD_SEARCH_GET]: ({ commit, dispatch }: types, word: string) => {
+	[CONSTANTS.WORD_SEARCH_GET]: ({ commit }: types, word: string): void => {
 		Axios.get('spy/cambridge/' + encodeURI(word) + '/autocomplete')
-			.then((resp) => {
+			.then((resp: any) => {
 				commit(CONSTANTS.WORD_SEARCH_RESPONSE, resp);
 			})
-			.catch((err) => {
+			.catch((err: any) => {
 				commit(CONSTANTS.WORD_SEARCH_ERROR, err.status);
 			});
 	},

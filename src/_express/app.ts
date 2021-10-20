@@ -2,9 +2,9 @@ import 'reflect-metadata';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { container } from "./inversify.config";
 import * as bodyParser from 'body-parser';
-const cors = require('cors');
+import cors from 'cors';
 
-let server = new InversifyExpressServer(container);
+const server = new InversifyExpressServer(container);
 
 import './controllers/ServiceController';
 import './controllers/TurengController';
@@ -14,9 +14,9 @@ server.setConfig((app) => {
 	app.use(bodyParser.json())
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cors());
-	app.options('*', cors());
+	app.options('*', cors);
 });
 
-let app = server.build();
+const app = server.build();
 
 export default app;

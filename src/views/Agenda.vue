@@ -24,8 +24,7 @@
               duration-500
               ease-in-out
               transform
-              hover:-translate-x-1
-              hover:scale-120
+              hover:-translate-x-1 hover:scale-120
               bg-green-500
               hover:bg-green-800
               px-6
@@ -48,8 +47,7 @@
               duration-500
               ease-in-out
               transform
-              hover:-translate-x-1
-              hover:scale-120
+              hover:-translate-x-1 hover:scale-120
               bg-red-500
               hover:bg-red-800
               px-6
@@ -99,8 +97,7 @@
           px-3
           text-gray-700
           leading-tight
-          focus:outline-none
-          focus:shadow-outline
+          focus:outline-none focus:shadow-outline
         "
         type="text"
         v-model="searchText"
@@ -113,8 +110,7 @@
           duration-500
           ease-in-out
           transform
-          hover:-translate-x-1
-          hover:scale-120
+          hover:-translate-x-1 hover:scale-120
           bg-gray-300
           hover:bg-gray-400
           text-gray-800
@@ -220,7 +216,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue, VueMixin } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
 import draggable from "vuedraggable";
 
@@ -289,26 +285,26 @@ import {
   },
 })
 export default class Agenda extends Vue {
-  viewType: boolean = true;
-  wordInfo: Array<object> = [];
-  words: Array<object> = [];
-  wordCollection: Array<object> = [];
-  showModal: boolean = false;
-  modalHeaderText: string = "true";
-  currentRoute: string = "agenda";
-  searchText: string = "";
+  viewType = true;
+  wordInfo: Array<any> = [];
+  words: Array<any> = [];
+  wordCollection: Array<any> = [];
+  showModal = false;
+  modalHeaderText = "true";
+  currentRoute = "agenda";
+  searchText = "";
   actionGetWord: any;
   actionUpdateWordOrder: any;
   actionDeleteWord: any;
   actionInfo: any;
   getWord: any;
   getInfo: any;
-  draggableStatus: boolean = true;
-  deleteModalShow: boolean = false;
+  draggableStatus = true;
+  deleteModalShow = false;
   wordToBeDelete: {
     id?: string;
     word?: string;
-    index?: Number;
+    index?: number;
   } = {};
 
   private listViewChanger(): void {
@@ -370,7 +366,7 @@ export default class Agenda extends Vue {
     }
   }
 
-  created() {
+  created(): void {
     this.actionGetWord(this.currentRoute);
   }
 }

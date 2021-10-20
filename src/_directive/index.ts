@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import ToolTip from './ToolTip'
 
-const install = function (app: App<Element>) {
+const install = function (app: App<Element>): void {
   app.directive('tooltip', ToolTip)
 }
 

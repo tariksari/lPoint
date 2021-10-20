@@ -1,4 +1,4 @@
-import { BrowserWindow, Tray, nativeTheme } from 'electron';
+import { BrowserWindow, protocol, Tray, nativeTheme } from 'electron';
 import Positioner from 'electron-positioner';
 import { EventEmitter } from 'events';
 import fs from 'fs';
@@ -8,7 +8,7 @@ import { Options } from './types';
 import { cleanOptions } from './util/cleanOptions';
 import { getWindowPosition } from './util/getWindowPosition';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-let AutoLaunch = require('auto-launch');
+import AutoLaunch from 'auto-launch';
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const APP_PATH = "/Applications/LPoint.app";
@@ -30,6 +30,11 @@ export class Menubar extends EventEmitter {
 
 	constructor(app: Electron.App, options?: Partial<Options>) {
 		super();
+		
+		protocol.registerSchemesAsPrivileged([
+			{ scheme: 'app', privileges: { secure: true, standard: true } }
+		])
+
 		this._app = app;
 		this._options = cleanOptions(options);
 		this._isVisible = false;
@@ -205,14 +210,14 @@ export class Menubar extends EventEmitter {
 		this.emit('after-show');
 		return;
 	}
-	
+
 	private async appReady(): Promise<void> {
 
-		let lPointAutoLauncher = new AutoLaunch({
+		const lPointAutoLauncher = new AutoLaunch({
 			name: 'LPoint',
 			path: APP_PATH,
 		});
-		
+
 		lPointAutoLauncher.enable();
 
 		if (this.app.dock && !this._options.showDockIcon) {
@@ -228,13 +233,13 @@ export class Menubar extends EventEmitter {
 		let trayImage =
 			this._options.icon ||
 			path.join(this._options.dir, 'status-bar.png');
-			
+
 		if (typeof trayImage === 'string' && !fs.existsSync(trayImage)) {
 			trayImage = this.trayIconSelectorByTheme()
 		}
 
 		nativeTheme.on('updated', () => {
-			this._tray?.destroy();
+			//this._tray?.destroy();
 			this._tray = new Tray(this.trayIconSelectorByTheme());
 
 			this.tray.on('click', this.clicked.bind(this));
@@ -273,7 +278,7 @@ export class Menubar extends EventEmitter {
 	/**
 	 * Try Icon Icon Selector
 	 */
-	private trayIconSelectorByTheme(){
+	private trayIconSelectorByTheme() {
 		return path.join(
 			__dirname,
 			'..',
@@ -281,7 +286,7 @@ export class Menubar extends EventEmitter {
 			'assets',
 			'app',
 			nativeTheme.shouldUseDarkColors ? 'status-bar-white.@2x.png' : 'status-bar.@2x.png'
-		); 
+		);
 	}
 
 	/**
@@ -337,8 +342,8 @@ export class Menubar extends EventEmitter {
 			this._browserWindow.isAlwaysOnTop()
 				? this.emit('focus-lost')
 				: (this._blurTimeout = setTimeout(() => {
-						this.hideWindow();
-				  }, 100));
+					this.hideWindow();
+				}, 100));
 		});
 
 		if (this._options.showOnAllWorkspaces !== false) {

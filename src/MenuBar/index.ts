@@ -5,7 +5,6 @@ import { Options } from './types';
 
 export * from './util/getWindowPosition';
 export { Menubar };
-require('../_express/main');
 
 /**
  * Factory function to create a menubar application

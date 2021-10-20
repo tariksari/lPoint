@@ -12,8 +12,8 @@ export default class TurengService {
      * @param word 
      * @returns 
      */
-    public async getWord(word: string) {
-        let respData = get(TURENG_API + encodeURIComponent(word));
+    public async getWord(word: string):Promise<Array<unknown>> {
+        const respData = get(TURENG_API + encodeURIComponent(word));
 
         return this.parseBody(respData)
     }
@@ -23,25 +23,25 @@ export default class TurengService {
      * @param body 
      * @returns 
      */
-    private parseBody(body: RequestPromise<any>): Promise<Array<object>> {
+    private parseBody(body: RequestPromise<any>): Promise<Array<unknown>> {
         return new Promise(function (resolve) {
             body.then((bodyData: any) => {
-                let allWord: Array<object> = [];
+                const allWord: Array<any> = [];
 
-                let $ = cheerio.load(bodyData, {
+                const $ = cheerio.load(bodyData, {
                     normalizeWhitespace: true,
                 });
 
                 $("#englishResultsTable tr").each(function (i: any, a: any) {
-                    let el = $(a);
-                    let attrClass = el.attr('class');
+                    const el = $(a);
+                    const attrClass = el.attr('class');
 
                     if (attrClass === undefined && el.attr('style') === undefined) {
 
-                        let category = el.find('td[class="hidden-xs"]').text().trim();
-                        let eng = el.find('td[lang="en"]').find('a').text().trim();
-                        let tur = el.find('td[lang="tr"]').text().trim();
-                        let type = el.find('td[lang="en"]').find('i').text().trim();
+                        const category = el.find('td[class="hidden-xs"]').text().trim();
+                        const eng = el.find('td[lang="en"]').find('a').text().trim();
+                        const tur = el.find('td[lang="tr"]').text().trim();
+                        const type = el.find('td[lang="en"]').find('i').text().trim();
 
                         if (category.length > 0) {
                             allWord.push({

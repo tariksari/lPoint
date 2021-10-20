@@ -55,7 +55,7 @@ export default class WordService {
      * @param order 
      * @returns 
      */
-    public async updateWordOrder(id: string, order: Number): Promise<number> {
+    public async updateWordOrder(id: string, order: number): Promise<number> {
         return await this.sqliteClient.updateOrder(id, order);
     }
 
@@ -85,7 +85,7 @@ export default class WordService {
      * @param req 
      */
     private async sorter(wordType: any, customItem: any = null) {
-        let words: any[][] = [];
+        const words: any[][] = [];
         let isCustomItemUpdated = false;
 
         await this.sqliteClient.getAllByFilter(wordType).then(function (word) {

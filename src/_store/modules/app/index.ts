@@ -4,9 +4,9 @@ import mutations from './mutations';
 
 type stateType = {
 	loader: boolean;
-  };
+};
 
-const state:stateType = {
+const state: stateType = {
 	loader: false,
 };
 

@@ -47,7 +47,7 @@ export class ServiceController {
 		this.resService.checkValidation(req, res);
 
 		try {
-			let word = await this.wordService.addWord(req.body);
+			const word = await this.wordService.addWord(req.body);
 
 			return this.resService.successResponse(word, res);
 		} catch (err) {

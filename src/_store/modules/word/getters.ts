@@ -1,4 +1,4 @@
 export default {
-	getData: (state: any) => state,
-	getButtonStatus: (state:any) => state.buttonStatus,
+	getData: (state: any): any => state,
+	getButtonStatus: (state: any): any => state.buttonStatus,
 };

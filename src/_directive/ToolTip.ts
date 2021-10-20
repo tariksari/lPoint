@@ -1,7 +1,7 @@
 const ToolTip = {
-    mounted(el: HTMLInputElement) {
+    mounted(el: HTMLInputElement): void {
 
-        let elBox: any = document.getElementById("tooltip-" + el.id);
+        const elBox = document.getElementById("tooltip-" + el.id);
 
         if (elBox) {
             el.addEventListener('mouseover', () => elBox.classList.add("show"));

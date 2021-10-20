@@ -42,13 +42,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
-import {
-  GridLarge,
-  PlaylistPlus,
-  PlayBoxOutline,
-  Check,
-  InformationVariant,
-} from "mdue";
+import { PlaylistPlus, PlayBoxOutline, Check, InformationVariant } from "mdue";
 
 @Options({
   components: {
@@ -83,17 +77,17 @@ import {
   },
 })
 export default class WordInfo extends Vue {
-  wordData: Array<object> = [{}];
+  wordData: Array<any> = [{}];
   currentRoute: any;
   actionSearch: any;
   actionAddWord: any;
   actionButtonStatus: any;
 
-  private playAudio(mediaUrl: string) {
+  private playAudio(mediaUrl: string): void {
     new Audio(mediaUrl).play();
   }
 
-  private addAgendaWord(data: any) {
+  private addAgendaWord(data: any): void {
     let AgendaWordAttributes = {
       type: "agenda",
       word: data.word,
@@ -108,11 +102,11 @@ export default class WordInfo extends Vue {
     this.actionAddWord(AgendaWordAttributes);
   }
 
-  mounted() {
+  mounted(): void {
     this.actionButtonStatus(false);
   }
 
-  created() {
+  created(): void {
     this.currentRoute = this.$route.params.word;
     this.actionSearch(this.currentRoute);
   }

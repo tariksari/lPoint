@@ -1,3 +1,3 @@
 export default {
-	getLoader: (state: any) => state,
+	getLoader: (state: any): any => state,
 };

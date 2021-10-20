@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 @Options({
   data() {
@@ -28,9 +28,6 @@ import { mapGetters, mapActions } from "vuex";
     ...mapGetters({
       getLoader: "APP/getLoader",
     }),
-  },
-  created() {
-    // console.log(this.getLoader);
   },
 })
 export default class LoadBar extends Vue {}

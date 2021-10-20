@@ -88,7 +88,7 @@ export class SqliteClient {
      * @param order 
      * @returns 
      */
-    public async updateOrder(id: string, order: Number): Promise<number> {
+    public async updateOrder(id: string, order: number): Promise<number> {
         return await this.db.update(
             { _id: id },
             { $set: { order: order } }, { multi: true }

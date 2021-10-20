@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import store from '../_store/index'
 
 import { API_CONFIG } from '@/_utils/api.config';
@@ -13,11 +13,12 @@ class Axios {
 
 	private initializeResponseInterceptor = () => {
 		this.instance.interceptors.request.use(
-			(req) => {
-				 store.dispatch('APP/ACTION_LOADER_STATUS', true);
-				 return req;	
+			(req: any) => {
+				store.dispatch('APP/ACTION_LOADER_STATUS', true);
+
+				return req;
 			},
-			(error) =>{
+			(error: any) => {
 				store.dispatch('APP/ACTION_LOADER_STATUS', false);
 				return Promise.reject(error)
 			});
@@ -27,7 +28,7 @@ class Axios {
 				store.dispatch('APP/ACTION_LOADER_STATUS', false);
 				return data;
 			},
-			(error) =>{
+			(error: any) => {
 				store.dispatch('APP/ACTION_LOADER_STATUS', false);
 				return Promise.reject(error)
 			});
