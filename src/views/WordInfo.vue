@@ -17,15 +17,12 @@
             <play-box-outline></play-box-outline>
           </a>
         </div>
-        <div class="item local-meaning">
+        <div
+          class="item local-meaning"
+          @click="actionTureng(value.word), (modalHeaderText = value.word)"
+        >
           <information-variant v-tooltip="" :id="key"></information-variant>
-          <div
-            v-if="value.local_meaning"
-            :id="'tooltip-' + key"
-            class="word-info"
-          >
-            {{ value.local_meaning }}
-          </div>
+  
         </div>
         <div class="item word-action" v-if="!getButtonStatus">
           <a @click="this.addAgendaWord(value)">
@@ -37,6 +34,26 @@
         </div>
       </div>
     </div>
+
+    <vue-final-modal
+      v-model="showModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :escToClose="true"
+    >
+      <button class="modal__close" @click="showModal = false">
+        <close class="text-red-600"></close>
+      </button>
+      <span class="modal__title text-yellow-500">{{ modalHeaderText }}</span>
+      <div class="modal__content">
+        <div v-for="(info,index) in getTurengWordInfo" :key="index" class="flex flex-row">
+          <div class="info-box text-red-400 flex-none">
+            {{ info.category }} - {{ info.type }}
+          </div>
+          <div class="pl-3">{{ info.tur }}</div>
+        </div>
+      </div>
+    </vue-final-modal>
   </div>
 </template>
 <script lang="ts">
@@ -52,8 +69,14 @@ import { PlaylistPlus, PlayBoxOutline, Check, InformationVariant } from "mdue";
     InformationVariant,
   },
   watch: {
-    "$route.params.word": function (par) {
+    "$route.params.word": function(par) {
       this.currentRoute = par;
+    },
+     getTurengWordInfo: {
+      handler() {
+        this.showModal = true;
+      },
+      deep: true,
     },
     getWord: {
       handler(val) {
@@ -64,12 +87,14 @@ import { PlaylistPlus, PlayBoxOutline, Check, InformationVariant } from "mdue";
   },
   computed: {
     ...mapGetters({
+      getTurengWordInfo: "TURENG/getData",
       getWord: "WORD_INFO/getData",
       getButtonStatus: "WORD/getButtonStatus",
     }),
   },
   methods: {
     ...mapActions({
+      actionTureng: "TURENG/WORD_INFO_REQUEST",
       actionSearch: "WORD_INFO/WORD_REQUEST",
       actionAddWord: "WORD/ADD_WORD_REQUEST",
       actionButtonStatus: "WORD/CHANGE_WORD_BUTTON_STATUS_ACTION",
@@ -78,7 +103,10 @@ import { PlaylistPlus, PlayBoxOutline, Check, InformationVariant } from "mdue";
 })
 export default class WordInfo extends Vue {
   wordData: Array<any> = [{}];
+  showModal = false;
+  modalHeaderText = "";
   currentRoute: any;
+  actionTureng: any;
   actionSearch: any;
   actionAddWord: any;
   actionButtonStatus: any;

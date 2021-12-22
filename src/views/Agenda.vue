@@ -249,7 +249,7 @@ import {
     },
     getTurengWordInfo: {
       handler(val) {
-        this.wordInfo = val.data;
+        this.wordInfo = val;
         this.showModal = true;
       },
       deep: true,
