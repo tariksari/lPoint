@@ -144,23 +144,24 @@
         <template #item="{ element, index }">
           <div class="item">
             <div class="action">
-              <div class="box audio">
-                <div class="box uk">
-                  <play-box-outline
-                    class="play"
-                    @click="this.playAudio(element.audio_uk)"
-                  ></play-box-outline>
+              <div class="left">
+                <div class="box audio">
+                  <div class="box uk">
+                    <play-box-outline
+                      class="play"
+                      @click="this.playAudio(element.audio_uk)"
+                    ></play-box-outline>
+                  </div>
+                  <div class="box us">
+                    <play-box-outline
+                      class="play"
+                      @click="this.playAudio(element.audio_us)"
+                    ></play-box-outline>
+                  </div>
                 </div>
-                <div class="box us">
-                  <play-box-outline
-                    class="play"
-                    @click="this.playAudio(element.audio_us)"
-                  ></play-box-outline>
-                </div>
-              </div>
-              <div class="box">
-                <div
-                  class="
+                <div class="box">
+                  <div
+                    class="
                     bg-middle-blue
                     hover:bg-middle-dark
                     text-yellow-300
@@ -170,39 +171,49 @@
                     cursor-pointer
                     border-b border-opacity-25 border-black
                   "
-                >
-                  <information-variant
-                    class="block top-1"
-                    :id="element._id"
-                    v-tooltip=""
-                    @click="
-                      wordInfoAction(
-                        element.word,
-                        (modalHeaderText = element.word)
-                      )
-                    "
-                  ></information-variant>
-                  <div
-                    v-if="element.local_meaning"
-                    :id="'tooltip-' + element._id"
-                    class="word-info"
                   >
-                    {{ element.local_meaning }}
+                    <information-variant
+                      class="block top-1"
+                      :id="element._id"
+                      v-tooltip=""
+                      @click="
+                        wordInfoAction(
+                          element.word,
+                          (modalHeaderText = element.word)
+                        )
+                      "
+                    ></information-variant>
+                    <div
+                      v-if="element.local_meaning"
+                      :id="'tooltip-' + element._id"
+                      class="word-info"
+                    >
+                      {{ element.local_meaning }}
+                    </div>
+                  </div>
+                  <div
+                    class="bg-middle-blue hover:bg-middle-dark text-red-200 h-5"
+                  >
+                    <button
+                      type="button"
+                      class="delete"
+                      id="options-menu"
+                      aria-haspopup="true"
+                      aria-expanded="true"
+                      @click="deleteWord(element._id, element.word, index)"
+                    >
+                      <delete-forever-outline></delete-forever-outline>
+                    </button>
                   </div>
                 </div>
-                <div
-                  class="bg-middle-blue hover:bg-middle-dark text-red-200 h-5"
-                >
-                  <button
-                    type="button"
-                    class="delete"
-                    id="options-menu"
-                    aria-haspopup="true"
-                    aria-expanded="true"
-                    @click="deleteWord(element._id, element.word, index)"
-                  >
-                    <delete-forever-outline></delete-forever-outline>
-                  </button>
+              </div>
+            </div>
+            <div class="action">
+              <div class="right">
+                <div class="box audio">
+                  <div class="box movup">
+                    <arrow-up @click="moveUpItem(element._id)" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -229,6 +240,7 @@ import {
   Close,
   DeleteForeverOutline,
   CloseBoxOutline,
+  ArrowUp,
 } from "mdue";
 
 @Options({
@@ -242,9 +254,10 @@ import {
     Close,
     DeleteForeverOutline,
     CloseBoxOutline,
+    ArrowUp,
   },
   watch: {
-    "$route.params.word": function (par) {
+    "$route.params.word": function(par) {
       this.currentRoute = par;
     },
     getTurengWordInfo: {
@@ -309,6 +322,21 @@ export default class Agenda extends Vue {
 
   private listViewChanger(): void {
     this.viewType = !this.viewType;
+  }
+
+  private moveUpItem(_id: any) {
+    let vm = this;
+    let attributes = {
+      id: _id,
+      order: 0,
+      list_type: "agenda",
+    };
+
+    vm.actionUpdateWordOrder(attributes).then(() => {
+      setTimeout(() => {
+        this.actionGetWord(this.currentRoute);
+      }, 200);
+    });
   }
 
   private searchWord() {

@@ -68,46 +68,56 @@
     }
 
     .action {
-      position: absolute;
-      display: block;
-      width: 20px;
-      height: 100%;
-      font-size: 17px;
-
-      .box {
-        position: relative;
-        display: block;
-        float: left;
-        width: 100%;
-        height: 40px;
-
-        svg {
-          font-size: 13px;
-          margin: 3px auto;
-        }
+      .right {
+        right: 0;
       }
-
-      .audio {
-        color: #fff;
-
-        .play {
-          font-size: 13px;
-          margin: 4px auto;
-        }
-
+      .right,
+      .left {
+        width: 20px;
+        height: 100%;
+        font-size: 17px;
+        display: block;
+        position: absolute;
         .box {
-          margin: 0 auto;
+          position: relative;
+          display: block;
+          float: left;
           width: 100%;
-          height: 20px;
-          cursor: pointer;
-        }
+          height: 40px;
 
-        .uk {
-          background-color: $uk-bg;
+          svg {
+            font-size: 13px;
+            margin: 3px auto;
+          }
         }
+        .audio {
+          color: #fff;
 
-        .us {
-          background-color: $us-bg;
+          .play {
+            font-size: 13px;
+            margin: 4px auto;
+          }
+
+          .box {
+            margin: 0 auto;
+            width: 100%;
+            height: 20px;
+            cursor: pointer;
+          }
+
+          .movup {
+            background-color: $uk-bg;
+            top: 60px;
+            right: 2px;
+          }
+
+          .uk {
+            background-color: $uk-bg;
+          }
+
+          .us {
+            background-color: $us-bg;
+          }
         }
       }
     }
