@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page word-info-list" v-if="wordData[0].hasOwnProperty('word')">
-      <div class="row" v-for="(value, key) in this.wordData" :key="key.id">
+      <div class="row-f" v-for="(value, key) in this.wordData" :key="key.id">
         <div class="item name">{{ value.word }}</div>
         <div class="item pronunciation-spell">
           /

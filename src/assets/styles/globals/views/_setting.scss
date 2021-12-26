@@ -1,0 +1,46 @@
+.setting__content {
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
+    background: linear-gradient(111deg, #c4c4c4 0%, #919191 100%);
+    padding: 20px;
+
+    .form-group {
+        button {
+            width: 113px;
+            font-size: 18px;
+            background-color: #6db386;
+            color: #dddddd;
+            float: right;
+
+            &:focus {
+                outline-style: none;
+                box-shadow: none;
+                border-color: transparent;
+                color: $white;
+            }
+
+            &:hover {
+                background-color: #6fa581;
+                color: #d6d6d6;
+            }
+
+            span {
+                font-size: 15px;
+            }
+        }
+
+        label {
+            color: #787878;
+            padding: 10px 10px 10px 0;
+        }
+        .form-control {
+            background-color: #adacac;
+            border: 1px solid #87847f;
+            color: #6a5b5a;
+        }
+
+        .form-action {
+            display: flow-root;
+            padding-top: 13px;
+        }
+    }
+}

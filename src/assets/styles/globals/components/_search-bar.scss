@@ -1,7 +1,7 @@
 .search-area {
+	padding: 10px;
 	display: flex;
 	flex-direction: row;
-	padding-top: 10px;
 
 	.row {
 		font-size: 17px;
@@ -11,12 +11,13 @@
 	}
 
 	input {
-		background: $pale-silver;
-		color: $dark-lava;
-		padding: 13px 29px 13px 13px;
+		background: #adacac;
+		color: #6a5b5a;
 		box-shadow: none !important;
 		border: none;
 		outline: 0;
+		width: 100%;
+		padding-left: 10px;
 
 		:focus {
 			outline-style: none;
@@ -32,14 +33,20 @@
 		margin-left: -20px;
 		font-size: 20px;
 		padding-left: 25px;
-		background-color: #42b983;
-		color: $white;
+		background-color: #6db386;
+		color: #dddddd;
 
-		&:hover{
-			background-color: #629e83;
-
+		&:focus {
+			outline-style: none;
+			box-shadow: none;
+			border-color: transparent;
+			color: $white;
 		}
-		
+
+		&:hover {
+			background-color: #6fa581;
+			color: #d6d6d6;
+		}
 
 		span {
 			font-size: 14px;
@@ -48,6 +55,18 @@
 }
 
 .search-result {
+	ul::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	ul::-webkit-scrollbar-track {
+		background-color: #b1b0b0;
+	}
+
+	ul::-webkit-scrollbar-thumb {
+		background-color: #9b9999;
+	}
+
 	ul {
 		list-style: none;
 		padding-left: 0;
@@ -56,17 +75,17 @@
 
 		a {
 			text-decoration: none;
-			color: #fff;
+			color: #6a5b5a;
 		}
 
 		li {
 			padding: 5px 0 5px 15px;
-			background-color: #8c807b;
-			border-bottom: 1px solid #473f39;
+			background-color: #adacac;
+			border-bottom: 1px solid #b5b5b5;
 			position: relative;
 
 			&:hover {
-				background-color: #42b983;
+				background-color: #b9b8b7;
 			}
 
 			.score {

@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "~bootstrap/scss/bootstrap";
 
 @import "variables";
-@import "page/index";
-@import "page/agenda";
-@import "page/search";
-@import "page/wordInfo";
+@import "theme/default.scss";
+

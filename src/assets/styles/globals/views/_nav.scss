@@ -1,0 +1,36 @@
+nav {
+    max-width: $app-max-width;
+    width: 100%;
+
+    background: linear-gradient(111deg, #c7c6c6 0%, #9b9a9a 100%);
+
+    .router-link-active {
+        background-color: #cfcfcf;
+    }
+
+    a {
+        font-weight: 500;
+        color: #7a7171;
+        text-decoration: none;
+        &:hover {
+            color: #87756e;
+        }
+    }
+
+    .setting__icon {
+        .router-link-active {
+            margin-top: 6px;
+            height: 29px;
+            display: block;
+
+            img,
+            svg {
+                vertical-align: initial;
+            }
+        }
+
+        color: #797071;
+        font-size: 24px;
+        padding: 0 !important;
+    }
+}

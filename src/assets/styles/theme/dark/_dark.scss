@@ -1,0 +1,291 @@
+.dark {
+    body {
+        background-color: rgb(26 26 26 / 82%);
+    }
+
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: #212121;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: #464646ab;
+    }
+
+    .loader {
+        background-color: #43434361 !important;
+        .v-beat {
+            background-color: rgb(148 231 189) !important;
+        }
+    }
+
+    nav {
+        background: linear-gradient(111deg, #303030 0%, #202020 100%);
+
+        .router-link-active {
+            background-color: #222222;
+        }
+
+        .router-link-active {
+            background-color: #cfcfcf;
+            background-color: #2b2b2b;
+        }
+
+        a {
+            color: #7e7c7c;
+            &:hover {
+                color: #4e4e4e;
+            }
+        }
+
+        .setting__icon {
+            color: #797071;
+        }
+    }
+
+    .agenda-list {
+        .view-type-button {
+        }
+        .item {
+            color: #979797;
+            background-color: #2828284a;
+
+            .name {
+                background-color: #22222252;
+            }
+            .word-info {
+                color: #fff;
+                border: solid 1px #a0aec0;
+            }
+
+            .action {
+                .right,
+                .left {
+                    .info {
+                        color: #8d8d8d;
+                        background-color: #4a4a4a;
+                        border-bottom: 1px solid #424242;
+                    }
+                    .delete {
+                        a {
+                            color: #8d8d8d;
+                        }
+                        background-color: #4a4a4a;
+                    }
+
+                    .movup {
+                        background-color: #4a4a4a;
+                        color: #8d8d8d;
+                    }
+
+                    .uk {
+                        color: #b9b9b9;
+                        background-color: #02b9ff30;
+                    }
+
+                    .us {
+                        color: #b9b9b9;
+                        background-color: #bf636370;
+                    }
+                }
+            }
+        }
+
+        .modal-content {
+            border: 1px solid #e2e8f0;
+            color: #e2e8f0;
+            border-color: #2d3748 !important;
+            background-color: $bg-5;
+        }
+
+        .modal__title {
+            color: #fbd38d;
+        }
+    }
+
+    .word-info-list {
+        .row-f {
+            border-bottom: 4px solid #323232;
+            background-color: #2828284a;
+
+            .item {
+                background-color: #4a4a4a;
+                color: #979797;
+            }
+
+            .word-info {
+                background-color: $bg-5;
+                color: #fff;
+                border: solid 1px #a0aec0;
+            }
+
+            .uk {
+                color: #b9b9b9;
+                background-color: #02b9ff30;
+            }
+
+            .us {
+                color: #b9b9b9;
+                background-color: #bf636370;
+            }
+
+            .local-meaning {
+                color: #979797;
+                background-color: #4a4a4a;
+            }
+
+            .name {
+                background-color: #22222252;
+                color: #979797;
+            }
+
+            .word-action {
+                background-color: #282828;
+
+                &:hover {
+                    background-color: #2f2f2f;
+                }
+            }
+        }
+    }
+
+    .search-area {
+        .row {
+            background-color: #8c807b;
+        }
+
+        input {
+            background: #525151c7;
+            color: #b1afaf;
+
+            :focus {
+                background-color: black;
+                color: $white;
+            }
+        }
+
+        button {
+            background-color: #282828;
+            color: #a39f9f;
+
+            &:focus {
+                color: $white;
+            }
+
+            &:hover {
+                background-color: #2f2f2f;
+                color: #a39f9f;
+            }
+        }
+    }
+
+    .search-result {
+        ul::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ul::-webkit-scrollbar-track {
+            background-color: #212121;
+        }
+
+        ul::-webkit-scrollbar-thumb {
+            background-color: #464646ab;
+        }
+
+        ul {
+            a {
+                color: #b1afaf;
+            }
+
+            li {
+                background-color: #4f4e4e;
+                border-bottom: 1px solid #5a5757;
+
+                &:hover {
+                    background-color: #626161;
+                }
+
+                .score {
+                    color: #eeeeee;
+                }
+            }
+        }
+    }
+
+    .modal__content::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .modal__content::-webkit-scrollbar-track {
+        background-color: #212121;
+    }
+
+    .modal__content::-webkit-scrollbar-thumb {
+        background-color: #464646ab;
+    }
+
+    .modal-content {
+        color: #2f2f2f;
+        border-color: #898989 !important;
+        background-color: rgb(131 128 124);
+
+        .btn_ok {
+            color: #262626;
+            background-color: #6db386;
+            &:hover {
+                background-color: #6fa581;
+                color: #262626;
+            }
+        }
+        .btn_no {
+            color: #262626;
+            background-color: #e16060;
+            &:hover {
+                background-color: #d37272;
+            }
+        }
+    }
+
+    .modal__title {
+        color: #a3a3a3;
+    }
+
+    .modal__close {
+        background-color: transparent;
+        border: none;
+        color: #2e2e2b !important;
+    }
+
+    .setting__content {
+        box-shadow: 0 0.125rem 0.25rem rgb(54 52 52) !important;
+        background: linear-gradient(111deg, #2828284a 0%, #545353 100%);
+
+        .form-group {
+            button {
+                background-color: #282828;
+                color: #a39f9f;
+
+                &:focus {
+                    color: $white;
+                }
+
+                &:hover {
+                    background-color: #2f2f2f;
+                    color: #a39f9f;
+                }
+            }
+
+            label {
+                color: #787878;
+            }
+            .form-control {
+                background-color: #525151c7;
+                border: 1px solid #3a3937;
+                color: #7e7c7c;
+            }
+        }
+    }
+}

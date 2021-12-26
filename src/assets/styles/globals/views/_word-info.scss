@@ -2,22 +2,23 @@
 	display: flex;
 	flex-direction: column;
 
-	.row {
+	.row-f {
 		height: 40px;
 		font-size: 17px;
-		background-color: #8c807b;
+		border-bottom: 4px solid #9f9f9f;
+		background-color: #b9b8b7;
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		border-bottom: 4px solid #473f39;
 
 		.item {
 			padding: 5px 15px 5px 19px;
 			justify-content: center;
 			height: 100%;
-			background-color: #cccccc;
+			background-color: #b9b8b7;
 			min-width: 60px;
 			min-width: 50px;
+			color: #7a6d6d;
 
 			svg {
 				height: 100%;
@@ -32,7 +33,6 @@
 			width: 122px;
 			height: auto;
 			padding: 5px;
-			color: #fff;
 			border: solid 1px #a0aec0;
 			margin-top: -34px;
 			margin-left: 32px;
@@ -46,22 +46,21 @@
 		}
 
 		.us {
-			background-color: $us-bg;
+			background-color: #bf6363;
 			cursor: pointer;
 		}
 
 		.uk {
-			background-color: $uk-bg;
+			background-color: #5da4bf;
 			cursor: pointer;
 		}
 
 		.pronunciation-audio {
-			color: white;
+			color: #f1f1f1;
 		}
 
 		.local-meaning {
-			background-color: $bg-5;
-			color: white;
+			background-color: #adacac;	
 			cursor: pointer;
 		}
 
@@ -71,15 +70,19 @@
 
 		.name {
 			font-size: 16px;
-			background-color: #1b1b1b;
-			color: #fff;
+			background-color: #adacac;
 		}
 
 		.word-action {
+			color: #dddddd;
 			margin-right: 0;
-			background-color: #b9ffe5;
+			background-color: #6db386;
 			margin-left: auto;
 			cursor: pointer;
+			&:hover{
+				background-color: #6fa581;
+
+			}
 		}
 	}
 }

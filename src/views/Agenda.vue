@@ -19,45 +19,13 @@
         <div class="modal__action">
           <button
             @click="confirmDeleteWord()"
-            class="
-              transition
-              duration-500
-              ease-in-out
-              transform
-              hover:-translate-x-1 hover:scale-120
-              bg-green-500
-              hover:bg-green-800
-              px-6
-              py-1
-              rounded
-              inline-flex
-              items-center
-              text-xs
-              mr-3
-            "
+            class="btn rounded-2 cbtn btn_ok"
           >
             <delete-forever-outline></delete-forever-outline>
             <span> YES</span>
           </button>
           <div></div>
-          <button
-            @click="clearDeleteWord()"
-            class="
-              transition
-              duration-500
-              ease-in-out
-              transform
-              hover:-translate-x-1 hover:scale-120
-              bg-red-500
-              hover:bg-red-800
-              px-6
-              py-1
-              rounded
-              inline-flex
-              items-center
-              text-xs text-white
-            "
-          >
+          <button @click="clearDeleteWord()" class="btn rounded-2 cbtn btn_no">
             <close-box-outline></close-box-outline>
             <span> NO</span>
           </button>
@@ -86,42 +54,9 @@
     </div>
 
     <div class="page search-area">
-      <input
-        class="
-          shadow-2xl shadow
-          appearance-none
-          border
-          rounded
-          w-full
-          py-2
-          px-3
-          text-gray-700
-          leading-tight
-          focus:outline-none focus:shadow-outline
-        "
-        type="text"
-        v-model="searchText"
-      />
+      <input class="rounded-2" type="text" v-model="searchText" />
 
-      <button
-        @click="this.searchText = ''"
-        class="
-          transition
-          duration-500
-          ease-in-out
-          transform
-          hover:-translate-x-1 hover:scale-120
-          bg-gray-300
-          hover:bg-gray-400
-          text-gray-800
-          font-bold
-          py-2
-          px-4
-          rounded
-          inline-flex
-          items-center
-        "
-      >
+      <button @click="this.searchText = ''" class="btn rounded-2">
         <text-box-remove-outline></text-box-remove-outline>
         <span> CLEAR</span>
       </button>
@@ -145,14 +80,14 @@
           <div class="item">
             <div class="action">
               <div class="left">
-                <div class="box audio">
-                  <div class="box uk">
+                <div class="box">
+                  <div class="content uk">
                     <play-box-outline
                       class="play"
                       @click="this.playAudio(element.audio_uk)"
                     ></play-box-outline>
                   </div>
-                  <div class="box us">
+                  <div class="content us">
                     <play-box-outline
                       class="play"
                       @click="this.playAudio(element.audio_us)"
@@ -160,18 +95,7 @@
                   </div>
                 </div>
                 <div class="box">
-                  <div
-                    class="
-                    bg-middle-blue
-                    hover:bg-middle-dark
-                    text-yellow-300
-                    info
-                    h-5
-                    flex
-                    cursor-pointer
-                    border-b border-opacity-25 border-black
-                  "
-                  >
+                  <div class="content info">
                     <information-variant
                       class="block top-1"
                       :id="element._id"
@@ -191,19 +115,16 @@
                       {{ element.local_meaning }}
                     </div>
                   </div>
-                  <div
-                    class="bg-middle-blue hover:bg-middle-dark text-red-200 h-5"
-                  >
-                    <button
-                      type="button"
-                      class="delete"
+                  <div class="content delete">
+                    <a
+                      class=""
                       id="options-menu"
                       aria-haspopup="true"
                       aria-expanded="true"
                       @click="deleteWord(element._id, element.word, index)"
                     >
                       <delete-forever-outline></delete-forever-outline>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

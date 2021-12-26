@@ -1,0 +1,50 @@
+.modal__content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal__content::-webkit-scrollbar-track {
+    background-color: #a5a5a5;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+    background-color: #919191ab;
+}
+
+.modal-content {
+    text-align: center;
+    color: #c5c4c4;
+    border-color: #585858;
+    background-color: #7c7c7c;
+
+    .cbtn {
+        width: 90px;
+        margin-right: 20px;
+        font-size: 14px;
+    }
+    .btn_ok {
+        background-color: #6db386;
+        color: #dddddd;
+        &:hover {
+            background-color: #6fa581;
+            color: #d6d6d6;
+        }
+    }
+    .btn_no {
+        color: #dddddd;
+        background-color: #c46f6f;
+        &:hover {
+            background-color: #bf6363;
+        }
+    }
+}
+
+.modal__title {
+    color: #d5d591ad;
+    padding-bottom: 13px;
+}
+
+.modal__close {
+    background-color: transparent;
+    border: none;
+    color: #2e2e2b;
+}

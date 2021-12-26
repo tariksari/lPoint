@@ -37,7 +37,7 @@ export default class LoadBar extends Vue {}
 .loader {
   width: 100%;
   height: 100%;
-  background-color: #00000080;
+  background-color: #87847f59;
   position: fixed;
   display: block;
   z-index: 99999;
