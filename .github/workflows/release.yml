@@ -1,9 +1,9 @@
 name: Build/release
 
 on:
-  pull_request:
-    types: [ closed ]
-    branches: main
+   push:
+    branches:
+      - main
 
 jobs:
   release:
