@@ -1,9 +1,9 @@
 name: Build/release
 
 on:
-  pull_request:
-    types: [ closed ]
-    branches: main
+   push:
+    branches:
+      - main
 
 jobs:
   release:
@@ -20,7 +20,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14
 
       - name: Tag Check
         run: |
@@ -31,4 +31,6 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           use_vue_cli: "true"
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          release: true
+          prerelease: false
+          draft: false
