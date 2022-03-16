@@ -102,13 +102,12 @@
                       v-tooltip=""
                       @click="
                         wordInfoAction(
-                          element.word,
+                          element,
                           (modalHeaderText = element.word)
                         )
                       "
                     ></information-variant>
                     <div
-                      v-if="element.local_meaning"
                       :id="'tooltip-' + element._id"
                       class="word-info"
                     >
@@ -185,6 +184,7 @@ import {
       handler(val) {
         this.wordInfo = val;
         this.showModal = true;
+        this.updateWordLocalMeaning(val);
       },
       deep: true,
     },
@@ -212,6 +212,7 @@ import {
   methods: {
     ...mapActions({
       actionGetWord: "WORD/WORD_REQUEST",
+      actionUpdateWord: "WORD/UPDATE_WORD_REQUEST",
       actionUpdateWordOrder: "WORD/UPDATE_WORD_ORDER_REQUEST",
       actionDeleteWord: "WORD/DELETE_WORD_REQUEST",
       actionInfo: "TURENG/WORD_INFO_REQUEST",
@@ -228,6 +229,7 @@ export default class Agenda extends Vue {
   currentRoute = "agenda";
   searchText = "";
   actionGetWord: any;
+  actionUpdateWord: any;
   actionUpdateWordOrder: any;
   actionDeleteWord: any;
   actionInfo: any;
@@ -240,9 +242,38 @@ export default class Agenda extends Vue {
     word?: string;
     index?: number;
   } = {};
+  itemSelectedForVocabulary: any = [];
 
   private listViewChanger(): void {
     this.viewType = !this.viewType;
+  }
+
+  private updateWordLocalMeaning(localMeaning: any): void {
+    localMeaning = localMeaning.slice(0, 5);
+
+    const formatedLocalMeaning = localMeaning.reduce(
+      (prevItem: any, currentItem: any, i: any) => {
+        const isIndicator = i !== localMeaning.length - 1 ? ", " : "";
+
+        return prevItem + currentItem.tur + isIndicator;
+      },
+      ""
+    );
+
+    if (
+      formatedLocalMeaning.lenght !== 0 &&
+      this.itemSelectedForVocabulary.local_meaning.length === 0
+    ) {
+      this.actionUpdateWord({
+        ...this.itemSelectedForVocabulary,
+        id: this.itemSelectedForVocabulary._id,
+        local_meaning: formatedLocalMeaning,
+      }).then(() => {
+        setTimeout(() => {
+          this.actionGetWord(this.currentRoute);
+        }, 200);
+      });
+    }
   }
 
   private moveUpItem(_id: any) {
@@ -293,8 +324,9 @@ export default class Agenda extends Vue {
     this.wordToBeDelete = {};
   }
 
-  private wordInfoAction(word: string): void {
-    this.actionInfo(word);
+  private wordInfoAction(element: any): void {
+    this.itemSelectedForVocabulary = element;
+    this.actionInfo(element.word);
   }
 
   private deleteWord(id: string, word: string) {

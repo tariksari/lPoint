@@ -4,7 +4,11 @@ const ToolTip = {
         const elBox = document.getElementById("tooltip-" + el.id);
 
         if (elBox) {
-            el.addEventListener('mouseover', () => elBox.classList.add("show"));
+            el.addEventListener("mouseover", () => {
+                if (elBox.innerHTML.length > 0) {
+                  elBox.classList.add("show");
+                }
+              });
             el.addEventListener('mouseout', () => elBox.classList.remove("show"));
         }
     }
